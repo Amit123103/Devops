@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amit's Advanced DevOps Masterclass & Interactive Laboratory</title>
+    <title>Amit's Advanced DevOps Masterclass & Animated Laboratory</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -16,6 +16,7 @@
             --text-muted: #9ca3af;
             --border-color: rgba(255, 255, 255, 0.1);
             --card-bg: rgba(255, 255, 255, 0.02);
+            --terminal-bg: rgba(17, 24, 39, 0.95);
         }
 
         * {
@@ -163,6 +164,64 @@
             margin-bottom: 32px;
         }
 
+        /* Step by Step Manual Cards */
+        .manual-section {
+            background: rgba(0, 0, 0, 0.15);
+            border: 1px dashed rgba(255, 255, 255, 0.08);
+            border-radius: 18px;
+            padding: 32px;
+            margin: 36px 0;
+        }
+
+        .manual-section h5 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #10b981;
+        }
+
+        .manual-step {
+            margin-bottom: 20px;
+            border-left: 3px solid rgba(59, 130, 246, 0.4);
+            padding-left: 18px;
+        }
+
+        .manual-step h6 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #60a5fa;
+            margin-bottom: 6px;
+        }
+
+        .manual-step p {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* Action Buttons */
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--accent-gradient);
+            color: #fff;
+            font-weight: 600;
+            font-size: 14px;
+            padding: 12px 24px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-bottom: 24px;
+        }
+
+        .action-btn:hover {
+            transform: scale(1.02) translateY(-2px);
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4);
+        }
+
         /* Grid Frameworks */
         .card-grid {
             display: grid;
@@ -221,33 +280,66 @@
             font-size: 13px;
         }
 
-        .code-title {
-            font-size: 14px;
-            font-weight: 600;
+        /* Animated Terminal Screen Simulation */
+        .terminal-container {
+            display: none;
+            background: var(--terminal-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 24px 0;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            font-family: 'JetBrains Mono', monospace;
+            color: #a7f3d0;
+            min-height: 220px;
+            animation: slideUp 0.4s ease;
+            position: relative;
+        }
+
+        .terminal-container.active {
+            display: block;
+        }
+
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            padding-bottom: 12px;
+        }
+
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .terminal-red { background: #ef4444; }
+        .terminal-yellow { background: #f59e0b; }
+        .terminal-green { background: #10b981; }
+
+        .terminal-title {
             color: var(--text-muted);
-            margin-top: 32px;
+            font-size: 12px;
+            margin-left: auto;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
-        /* Interactive Detail Modules */
-        .detail-block {
-            margin: 32px 0;
-            padding-left: 20px;
-            border-left: 3px solid #3b82f6;
-        }
-
-        .detail-block h5 {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: var(--text-main);
-        }
-
-        .detail-block p {
-            font-size: 15px;
-            color: var(--text-muted);
+        .terminal-body {
             line-height: 1.7;
+            font-size: 14px;
+            white-space: pre-wrap;
+        }
+
+        .terminal-cursor {
+            display: inline-block;
+            background: #fff;
+            width: 8px;
+            height: 18px;
+            animation: blink 1s step-end infinite;
+            vertical-align: middle;
+            margin-left: 4px;
         }
 
         /* Image Display Matrix */
@@ -293,35 +385,9 @@
             font-weight: 500;
         }
 
-        /* Animations Framework */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(24px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Custom Scrollbars Styling */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.15);
-        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes blink { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
 
         @media (max-width: 1024px) {
             body { flex-direction: column; }
@@ -336,7 +402,7 @@
     <aside class="sidebar">
         <div class="sidebar-brand">
             <h1>Amit DevOps</h1>
-            <span>Interactive Platform</span>
+            <span>Animated Interactive Manual</span>
         </div>
         <ul class="nav-list">
             <li class="nav-item active"><a href="#unit1" onclick="switchUnit('unit1')">📦 01. DevOps Infrastructure</a></li>
@@ -351,51 +417,44 @@
     <!-- MAIN CONTENT AREA -->
     <main class="main-content">
         <div class="header-section">
-            <h2>Amit's Infrastructure Knowledge Base</h2>
-            <p>An advanced engineering documentation manual for containerized workloads, automation lifecycles, and cloud infrastructure pipelines.</p>
+            <h2>Amit's Step-by-Step Interactive Laboratory</h2>
+            <p>Access step-by-step guidance for every practical, complete with animated terminal outputs for full simulation.</p>
         </div>
 
-        <!-- UNIT 1: INFRASTRUCTURE CORE -->
+        <!-- UNIT 1 -->
         <section id="unit1" class="unit-section active">
             <h3 class="unit-title">Unit I: Basics of DevOps Infrastructure</h3>
-            <p class="unit-intro">An analytical approach to container engines. Understand how hardware resources are abstracted natively on the Linux Kernel via Namespaces, cgroups, and storage layer controls.</p>
-            
-            <div class="card-grid">
-                <div class="feature-card">
-                    <h4>Origins of Virtualization</h4>
-                    <p>Heavy hypervisor abstraction requires duplicate guest kernel installations. Modern container engines bypass guest OS layers entirely, executing processes natively on the host kernel.</p>
+            <p class="unit-intro">An analytical approach to container engines. Read step-by-step guidance and view live execution animations.</p>
+
+            <button class="action-btn" onclick="startSim('term1', 'amit@devops:~$ docker pull nginx:alpine\nStatus: Downloaded newer image for nginx:alpine\namit@devops:~$ docker run -d --name web_server -p 80:80 nginx:alpine\nf9e18b0c223a851d0db1262ab091176b1\namit@devops:~$ docker ps\nCONTAINER ID   IMAGE          COMMAND       STATUS       PORTS\nf9e18b0c223a   nginx:alpine   \"nginx -g…\"   Up 2 sec     0.0.0.0:80->80/tcp')">▶ Run Terminal Simulation (Typewriter Animation)</button>
+
+            <div id="term1" class="terminal-container">
+                <div class="terminal-header">
+                    <div class="terminal-dot terminal-red"></div>
+                    <div class="terminal-dot terminal-yellow"></div>
+                    <div class="terminal-dot terminal-green"></div>
+                    <span class="terminal-title">Docker Live Execution - Animated Simulation</span>
                 </div>
-                <div class="feature-card">
-                    <h4>Kernel Namespaces</h4>
-                    <p>Creates explicit logical boundary boundaries. Implements isolation across Network Interfaces, Mount points, Inter-Process Trees (PID), and User/UID registries.</p>
+                <div class="terminal-body" id="term1-txt"></div>
+            </div>
+
+            <div class="manual-section">
+                <h5>📖 Complete Step-by-Step Guidance (Unit 1)</h5>
+                <div class="manual-step">
+                    <h6>Step 1.1: Environment Setup</h6>
+                    <p>Log in to your local workspace. Ensure Docker daemon is operational by executing the diagnostic command <code>docker version</code>.</p>
                 </div>
-                <div class="feature-card">
-                    <h4>Cgroups V1 & V2</h4>
-                    <p>Acts as process throttlers. Restricts usage of hardware compute resources: hard/soft RAM limitations, block device read-write access limits, and CPU allocation shares.</p>
+                <div class="manual-step">
+                    <h6>Step 1.2: Image Acquisition</h6>
+                    <p>Pull an isolated Nginx base from remote registries to the host by running: <code>docker pull nginx:alpine</code>.</p>
+                </div>
+                <div class="manual-step">
+                    <h6>Step 1.3: Container Invocation</h6>
+                    <p>Spin up the container in isolated background mode using port forwarding flags: <code>docker run -d --name amit_web_server -p 8080:80 nginx:alpine</code>.</p>
                 </div>
             </div>
 
-            <div class="detail-block">
-                <h5>Deep Dive: Namespace Isolation Specifics</h5>
-                <p>Namespaces alter how processes view the system. For example, <code>PID namespace</code> assigns a child process as PID 1 inside the container, while it retains a high-order PID on the host. <code>NET namespace</code> encapsulates physical interfaces, routing tables, and firewalls into isolated interfaces.</p>
-            </div>
-
-            <div class="code-title">Terminal Playground Session</div>
-            <pre>
-# Determine running system properties & namespaces
-lsns -t pid
-
-# Fetch Nginx container image to local store
-docker pull nginx:alpine
-
-# Launch detached web server with host port mapping
-docker run -d --name amit_web_server -p 8080:80 nginx:alpine
-
-# Inspect low-level process and kernel metadata
-docker inspect amit_web_server
-            </pre>
-
-            <h4>📸 Operational Insights Matrix (8 Images)</h4>
+            <h4>📸 Practical Visualizations (8 Images)</h4>
             <div class="image-gallery">
                 <div class="gallery-item"><img src="./Unit_01_DevOps_and_Containers/amit_docker_cli.png"><div class="gallery-caption">CLI Workflow</div></div>
                 <div class="gallery-item"><img src="./Unit_01_DevOps_and_Containers/amit_u1_p1.png"><div class="gallery-caption">Container vs VM Layout</div></div>
@@ -408,58 +467,40 @@ docker inspect amit_web_server
             </div>
         </section>
 
-        <!-- UNIT 2: ADVANCED IMAGE BUILDING -->
+        <!-- UNIT 2 -->
         <section id="unit2" class="unit-section">
             <h3 class="unit-title">Unit II: Image Building & Container Management</h3>
-            <p class="unit-intro">Designing lean, high-fidelity images. Learn the mechanics of Copy-on-Write storage layers, .dockerignore contexts, and explicit networking topology designs.</p>
+            <p class="unit-intro">Designing lean, high-fidelity images. Learn the mechanics of Copy-on-Write layers.</p>
 
-            <div class="card-grid">
-                <div class="feature-card">
-                    <h4>Storage Layer Mechanics</h4>
-                    <p>Docker images are read-only filesystem stacks. Modifications create thin, dynamic read-write layers via Copy-on-Write (CoW).</p>
+            <button class="action-btn" onclick="startSim('term2', 'amit@devops:~$ docker build -t my-custom-app:v1 .\n[+] Building 4.2s (8/8) FINISHED\n => [internal] load build definition from Dockerfile\n => [internal] load metadata for node:20-alpine\n => [1/4] FROM node:20-alpine\n => [2/4] COPY package*.json ./\n => [3/4] RUN npm ci\n => [4/4] COPY . .\n => exporting to image\n => => writing image sha256:d8c9f0e132')">▶ Run Terminal Simulation (Typewriter Animation)</button>
+
+            <div id="term2" class="terminal-container">
+                <div class="terminal-header">
+                    <div class="terminal-dot terminal-red"></div>
+                    <div class="terminal-dot terminal-yellow"></div>
+                    <div class="terminal-dot terminal-green"></div>
+                    <span class="terminal-title">Docker Build Live Execution - Animated Simulation</span>
                 </div>
-                <div class="feature-card">
-                    <h4>Persistence Architecture</h4>
-                    <p>Decouples storage. Volumes persist outside container lifecycles; Bind Mounts explicitly map host paths to containers.</p>
+                <div class="terminal-body" id="term2-txt"></div>
+            </div>
+
+            <div class="manual-section">
+                <h5>📖 Complete Step-by-Step Guidance (Unit 2)</h5>
+                <div class="manual-step">
+                    <h6>Step 2.1: Context Filters</h6>
+                    <p>Formulate a <code>.dockerignore</code> file within your local context folder to skip transferring node modules and git folders to the Docker daemon.</p>
                 </div>
-                <div class="feature-card">
-                    <h4>Context Filtering</h4>
-                    <p>Using <code>.dockerignore</code> stops non-essential files from migrating into the Docker Daemon's working context memory.</p>
+                <div class="manual-step">
+                    <h6>Step 2.2: Dockerfile Development</h6>
+                    <p>Create your custom <code>Dockerfile</code>. Leverage layer caching by copying package manifests and installing binaries before adding application sources.</p>
+                </div>
+                <div class="manual-step">
+                    <h6>Step 2.3: Compiling Your Image</h6>
+                    <p>Run the direct build compilation command using tags: <code>docker build -t my-app:v1.0 .</code>.</p>
                 </div>
             </div>
 
-            <div class="detail-block">
-                <h5>Understanding Storage Management Options</h5>
-                <p>When running database services like MySQL or Redis, standard ephemeral storage is unviable. Using <code>-v amit_volume:/var/lib/mysql</code> ensures your data persists even if the container is removed.</p>
-            </div>
-
-            <div class="code-title">Production Dockerfile Blueprint</div>
-            <pre>
-# Use secure, ultra-thin alpine base image
-FROM node:20-alpine
-
-# Set application labels
-LABEL maintainer="amit@example.com"
-LABEL version="1.0.0"
-
-# Setup secure working context
-WORKDIR /usr/src/app
-
-# Leverage cached dependency installation layer
-COPY package*.json ./
-RUN npm ci --only=production
-
-# Copy functional assets
-COPY . .
-
-# Expose server ingress port
-EXPOSE 3000
-
-# Set entry point execution command
-CMD ["node", "server.js"]
-            </pre>
-
-            <h4>📸 Operational Insights Matrix (8 Images)</h4>
+            <h4>📸 Practical Visualizations (8 Images)</h4>
             <div class="image-gallery">
                 <div class="gallery-item"><img src="./Unit_02_Image_Building/amit_docker_build.png"><div class="gallery-caption">Terminal Build Output</div></div>
                 <div class="gallery-item"><img src="./Unit_02_Image_Building/amit_u2_p1.png"><div class="gallery-caption">File System Layering</div></div>
@@ -472,80 +513,40 @@ CMD ["node", "server.js"]
             </div>
         </section>
 
-        <!-- UNIT 3: MICROSERVICES & COMPOSE -->
+        <!-- UNIT 3 -->
         <section id="unit3" class="unit-section">
             <h3 class="unit-title">Unit III: Microservices with Docker Compose</h3>
-            <p class="unit-intro">Managing multi-tier microservices stacks using Docker Compose. Scale and interconnect backend services using declarative YAML topologies.</p>
+            <p class="unit-intro">Managing multi-tier microservice stacks declarative workflows.</p>
 
-            <div class="card-grid">
-                <div class="feature-card">
-                    <h4>Application Decomposition</h4>
-                    <p>Converts single application monoliths into independent microservices to improve horizontal scalability and fault isolation.</p>
+            <button class="action-btn" onclick="startSim('term3', 'amit@devops:~$ docker compose up -d\n[+] Running 4/4\n ⠿ Network internal_network  Created\n ⠿ Volume db_data            Created\n ⠿ Container mysql_db        Started\n ⠿ Container wordpress_app   Started')">▶ Run Terminal Simulation (Typewriter Animation)</button>
+
+            <div id="term3" class="terminal-container">
+                <div class="terminal-header">
+                    <div class="terminal-dot terminal-red"></div>
+                    <div class="terminal-dot terminal-yellow"></div>
+                    <div class="terminal-dot terminal-green"></div>
+                    <span class="terminal-title">Docker Compose Live Execution - Animated Simulation</span>
                 </div>
-                <div class="feature-card">
-                    <h4>Declarative Topology</h4>
-                    <p>Defines complex services, private networks, volumes, and environment variables within a unified YAML file configuration.</p>
+                <div class="terminal-body" id="term3-txt"></div>
+            </div>
+
+            <div class="manual-section">
+                <h5>📖 Complete Step-by-Step Guidance (Unit 3)</h5>
+                <div class="manual-step">
+                    <h6>Step 3.1: Specifying the Docker Compose File</h6>
+                    <p>Create a <code>docker-compose.yml</code> file. Define private bridges and mapped volumes for both backend and web services.</p>
                 </div>
-                <div class="feature-card">
-                    <h4>Dependency Ordering</h4>
-                    <p>Uses the <code>depends_on</code> directive to control startup sequences for interconnected servers (e.g., ensuring a database starts before the web server).</p>
+                <div class="manual-step">
+                    <h6>Step 3.2: Starting the Orchestrated Stack</h6>
+                    <p>Launch the entire interconnected environment by running: <code>docker compose up -d</code>.</p>
+                </div>
+                <div class="manual-step">
+                    <h6>Step 3.3: Inspecting Service Statuses</h6>
+                    <p>Run <code>docker compose ps</code> to confirm that all defined service containers are healthy and running.</p>
                 </div>
             </div>
 
-            <div class="detail-block">
-                <h5>Architecture Specifics: API Gateway Integration</h5>
-                <p>An API Gateway acts as the entry point for clients, routing requests to appropriate backend services. This architecture decouples clients from service changes and provides unified authentication and logging.</p>
-            </div>
-
-            <div class="code-title">Multi-Service Stack Composition YAML</div>
-            <pre>
-version: '3.8'
-
-services:
-  db:
-    image: mysql:8.0
-    container_name: amit_mysql_service
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: root_secret_pwd
-      MYSQL_DATABASE: wordpress
-      MYSQL_USER: wordpress_usr
-      MYSQL_PASSWORD: wordpress_pwd
-    volumes:
-      - wordpress_db_data:/var/lib/mysql
-    networks:
-      - internal_network
-
-  wordpress:
-    image: wordpress:latest
-    container_name: amit_wordpress_service
-    restart: always
-    ports:
-      - "8080:80"
-    environment:
-      WORDPRESS_DB_HOST: db:3306
-      WORDPRESS_DB_USER: wordpress_usr
-      WORDPRESS_DB_PASSWORD: wordpress_pwd
-      WORDPRESS_DB_NAME: wordpress
-    depends_on:
-      - db
-    volumes:
-      - wordpress_app_data:/var/www/html
-    networks:
-      - internal_network
-
-volumes:
-  wordpress_db_data:
-    driver: local
-  wordpress_app_data:
-    driver: local
-
-networks:
-  internal_network:
-    driver: bridge
-            </pre>
-
-            <h4>📸 Operational Insights Matrix (8 Images)</h4>
+            <h4>📸 Practical Visualizations (8 Images)</h4>
             <div class="image-gallery">
                 <div class="gallery-item"><img src="./Unit_03_Docker_Compose/amit_docker_compose.png"><div class="gallery-caption">Compose Up Status</div></div>
                 <div class="gallery-item"><img src="./Unit_03_Docker_Compose/amit_u3_p1.png"><div class="gallery-caption">Microservices Topology</div></div>
@@ -558,50 +559,40 @@ networks:
             </div>
         </section>
 
-        <!-- UNIT 4: MAVEN AUTOMATION -->
+        <!-- UNIT 4 -->
         <section id="unit4" class="unit-section">
             <h3 class="unit-title">Unit IV: Maven Build Automation</h3>
-            <p class="unit-intro">Optimize software packaging using the Maven lifecycle. Learn about transitive dependency resolution and multi-stage container optimization.</p>
+            <p class="unit-intro">Resolve Java artifacts dependencies with multi-stage deployments.</p>
 
-            <div class="card-grid">
-                <div class="feature-card">
-                    <h4>POM Architecture</h4>
-                    <p>The <code>pom.xml</code> file configures external library fetching, compiler targets, and build goals.</p>
+            <button class="action-btn" onclick="startSim('term4', 'amit@devops:~$ mvn clean package\n[INFO] Scanning for projects...\n[INFO] ------------------------------------------------------------------------\n[INFO] BUILD SUCCESS\n[INFO] ------------------------------------------------------------------------\n[INFO] Total time: 3.421 s\n[INFO] Finished at: 2026-05-01T21:40:00Z\n[INFO] ------------------------------------------------------------------------')">▶ Run Terminal Simulation (Typewriter Animation)</button>
+
+            <div id="term4" class="terminal-container">
+                <div class="terminal-header">
+                    <div class="terminal-dot terminal-red"></div>
+                    <div class="terminal-dot terminal-yellow"></div>
+                    <div class="terminal-dot terminal-green"></div>
+                    <span class="terminal-title">Maven Live Execution - Animated Simulation</span>
                 </div>
-                <div class="feature-card">
-                    <h4>Dependency Resolution</h4>
-                    <p>Maven builds resolve dependency trees automatically. Uses nearest-definition rules to avoid classpath version conflicts.</p>
+                <div class="terminal-body" id="term4-txt"></div>
+            </div>
+
+            <div class="manual-section">
+                <h5>📖 Complete Step-by-Step Guidance (Unit 4)</h5>
+                <div class="manual-step">
+                    <h6>Step 4.1: Project Definition</h6>
+                    <p>Create a valid <code>pom.xml</code> file containing build coordinates, plugins, and dependencies.</p>
                 </div>
-                <div class="feature-card">
-                    <h4>Multi-Stage Containers</h4>
-                    <p>Separates build and runtime environments. Builds binaries in a Maven image and copies them to a thin runtime JRE image.</p>
+                <div class="manual-step">
+                    <h6>Step 4.2: Compiling Your Application</h6>
+                    <p>Trigger tests and build artifact JAR packages by running: <code>mvn clean package</code>.</p>
+                </div>
+                <div class="manual-step">
+                    <h6>Step 4.3: Testing</h6>
+                    <p>Execute JUnit test suites using: <code>mvn test</code>.</p>
                 </div>
             </div>
 
-            <div class="detail-block">
-                <h5>Understanding the Maven Lifecycle</h5>
-                <p>Maven divides the build process into distinct phases. Common phases include <code>validate</code>, <code>compile</code>, <code>test</code>, <code>package</code>, <code>verify</code>, <code>install</code>, and <code>deploy</code>. Executing a phase triggers all preceding phases automatically.</p>
-            </div>
-
-            <div class="code-title">Multi-Stage Java Dockerfile</div>
-            <pre>
-# Stage 1: Build the Maven application
-FROM maven:3.9-eclipse-temurin-17 AS build
-WORKDIR /app
-COPY pom.xml .
-RUN mvn dependency:go-offline
-COPY src ./src
-RUN mvn clean package -DskipTests
-
-# Stage 2: Runtime Container
-FROM eclipse-temurin:17-jre-alpine
-WORKDIR /app
-COPY --from=build /app/target/*.jar app.jar
-EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "app.jar"]
-            </pre>
-
-            <h4>📸 Operational Insights Matrix (8 Images)</h4>
+            <h4>📸 Practical Visualizations (8 Images)</h4>
             <div class="image-gallery">
                 <div class="gallery-item"><img src="./Unit_04_Maven_Automation/amit_maven.png"><div class="gallery-caption">Packaging Logs</div></div>
                 <div class="gallery-item"><img src="./Unit_04_Maven_Automation/amit_u4_p1.png"><div class="gallery-caption">Lifecycle Phases</div></div>
@@ -614,69 +605,40 @@ ENTRYPOINT ["java", "-jar", "app.jar"]
             </div>
         </section>
 
-        <!-- UNIT 5: GITHUB ACTIONS CI -->
+        <!-- UNIT 5 -->
         <section id="unit5" class="unit-section">
             <h3 class="unit-title">Unit V: Continuous Integration with GitHub Actions</h3>
-            <p class="unit-intro">Implement native workflow automations inside GitHub. Learn how to trigger test phases and push production-ready images on code commits.</p>
+            <p class="unit-intro">Automate your CI workflow pipelines.</p>
 
-            <div class="card-grid">
-                <div class="feature-card">
-                    <h4>Native Workflow Scripts</h4>
-                    <p>Listens for direct source events like <code>push</code> or <code>pull_request</code> to trigger automated test suites.</p>
+            <button class="action-btn" onclick="startSim('term5', 'amit@devops:~$ git push origin main\nEnumerating objects: 5, done.\nCounting objects: 100% (5/5), done.\nWriting objects: 100% (3/3), 320 bytes\nTo https://github.com/Amit123103/Devops.git\n   c17c100..ad06733  main -> main\n[INFO] GitHub Actions Runner: Running tests for Amit...')">▶ Run Terminal Simulation (Typewriter Animation)</button>
+
+            <div id="term5" class="terminal-container">
+                <div class="terminal-header">
+                    <div class="terminal-dot terminal-red"></div>
+                    <div class="terminal-dot terminal-yellow"></div>
+                    <div class="terminal-dot terminal-green"></div>
+                    <span class="terminal-title">GitHub Actions Live Execution - Animated Simulation</span>
                 </div>
-                <div class="feature-card">
-                    <h4>Infrastructure Runners</h4>
-                    <p>Uses multi-job workflows in dedicated cloud runners (Ubuntu, macOS, Windows) to run tests in parallel.</p>
+                <div class="terminal-body" id="term5-txt"></div>
+            </div>
+
+            <div class="manual-section">
+                <h5>📖 Complete Step-by-Step Guidance (Unit 5)</h5>
+                <div class="manual-step">
+                    <h6>Step 5.1: Defining Workflows</h6>
+                    <p>Create a workflow file at <code>.github/workflows/ci.yml</code>.</p>
                 </div>
-                <div class="feature-card">
-                    <h4>Matrix Builds Strategy</h4>
-                    <p>Tests matching variations across multiple platforms or SDK versions within a single job execution block.</p>
+                <div class="manual-step">
+                    <h6>Step 5.2: Triggers</h6>
+                    <p>Listen for code changes using the <code>on: [push, pull_request]</code> triggers.</p>
+                </div>
+                <div class="manual-step">
+                    <h6>Step 5.3: Executing the Pipeline</h6>
+                    <p>Push local commits to your GitHub repository to trigger the automated build runner.</p>
                 </div>
             </div>
 
-            <div class="detail-block">
-                <h5>Understanding Runners and Marketplace Integrations</h5>
-                <p>Workflows run on isolated virtual machines. Using pre-packaged marketplace actions like <code>actions/checkout</code> and <code>actions/setup-java</code> simplifies writing workflows.</p>
-            </div>
-
-            <div class="code-title">Production Workflow Script (.github/workflows/ci.yml)</div>
-            <pre>
-name: CI/CD Multi-Job Integration
-
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
-jobs:
-  build_and_test:
-    name: Build & Run Tests
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: Unit_04_Maven_Automation
-
-    steps:
-    - name: Checkout Code from Repo
-      uses: actions/checkout@v4
-
-    - name: Set up JDK 17
-      uses: actions/setup-java@v4
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-        cache: maven
-        cache-dependency-path: '**/pom.xml'
-
-    - name: Run Maven Tests
-      run: mvn test
-
-    - name: Package Maven Artifact
-      run: mvn package -DskipTests
-            </pre>
-
-            <h4>📸 Operational Insights Matrix (8 Images)</h4>
+            <h4>📸 Practical Visualizations (8 Images)</h4>
             <div class="image-gallery">
                 <div class="gallery-item"><img src="./Unit_05_GitHub_Actions/amit_github_actions.png"><div class="gallery-caption">GitHub Actions Output</div></div>
                 <div class="gallery-item"><img src="./Unit_05_GitHub_Actions/amit_u5_p1.png"><div class="gallery-caption">Folder Topology</div></div>
@@ -689,64 +651,40 @@ jobs:
             </div>
         </section>
 
-        <!-- UNIT 6: JENKINS PIPELINES -->
+        <!-- UNIT 6 -->
         <section id="unit6" class="unit-section">
             <h3 class="unit-title">Unit VI: CI/CD with Jenkins</h3>
-            <p class="unit-intro">Learn declarative multi-stage software delivery pipelines. Understand persistent Master and Agent worker topologies and dynamic container execution.</p>
+            <p class="unit-intro">Establish robust declarative software delivery pipelines.</p>
 
-            <div class="card-grid">
-                <div class="feature-card">
-                    <h4>Master/Agent Clustering</h4>
-                    <p>The Master orchestrates job scheduling and triggers. Agents execute pipeline steps inside isolated compute layers.</p>
+            <button class="action-btn" onclick="startSim('term6', 'amit@devops:~$ jenkins-cli build my-pipeline\nStarted by remote user Amit\nRunning in Jenkins Agent Node #3\n[Pipeline] stage (Checkout)\n[Pipeline] sh \"git fetch --all\"\n[Pipeline] stage (Build)\n[Pipeline] sh \"mvn clean test\"\n[Pipeline] Finished: SUCCESS')">▶ Run Terminal Simulation (Typewriter Animation)</button>
+
+            <div id="term6" class="terminal-container">
+                <div class="terminal-header">
+                    <div class="terminal-dot terminal-red"></div>
+                    <div class="terminal-dot terminal-yellow"></div>
+                    <div class="terminal-dot terminal-green"></div>
+                    <span class="terminal-title">Jenkins Live Execution - Animated Simulation</span>
                 </div>
-                <div class="feature-card">
-                    <h4>Declarative Pipeline DSL</h4>
-                    <p>A structured, versioned Groovy DSL saved inside the repository as a <code>Jenkinsfile</code> to improve reliability.</p>
+                <div class="terminal-body" id="term6-txt"></div>
+            </div>
+
+            <div class="manual-section">
+                <h5>📖 Complete Step-by-Step Guidance (Unit 6)</h5>
+                <div class="manual-step">
+                    <h6>Step 6.1: Writing a Jenkinsfile</h6>
+                    <p>Add a declarative <code>Jenkinsfile</code> at the root of your project to define your build pipeline steps.</p>
                 </div>
-                <div class="feature-card">
-                    <h4>Dynamic Agent Layers</h4>
-                    <p>Run stages natively inside temporary container execution environments to isolate build dependencies.</p>
+                <div class="manual-step">
+                    <h6>Step 6.2: SCM Configuration</h6>
+                    <p>Connect your GitHub repository to Jenkins. Configure webhooks to trigger builds on code commits.</p>
+                </div>
+                <div class="manual-step">
+                    <h6>Step 6.3: Multi-Branch Pipeline</h6>
+                    <p>Create a Multi-Branch Pipeline job in Jenkins to automatically build and test matching project branches.</p>
                 </div>
             </div>
 
-            <div class="detail-block">
-                <h5>Understanding Webhooks & Automation Triggers</h5>
-                <p>Webhooks trigger automated build jobs in Jenkins on every code commit. Alternatively, the <code>pollSCM</code> directive checks the repository periodically for changes.</p>
-            </div>
-
-            <div class="code-title">Declarative Jenkinsfile Configuration Blueprint</div>
-            <pre>
-pipeline {
-    agent any
-
-    environment {
-        IMAGE_NAME = "amit/my-app"
-        IMAGE_TAG = "latest"
-    }
-
-    stages {
-        stage('Checkout Code') {
-            steps {
-                git branch: 'main', url: 'https://github.com/Amit123103/Devops.git'
-            }
-        }
-
-        stage('Compile & Test') {
-            steps {
-                sh 'mvn clean test'
-            }
-        }
-
-        stage('Build & Package') {
-            steps {
-                sh 'mvn package -DskipTests'
-            }
-        }
-    }
-}
-            </pre>
-
-            <h4>📸 Operational Insights Matrix (8 Images)</h4>
+            <h4>📸 Practical Visualizations (8 Images)</h4>
             <div class="image-gallery">
                 <div class="gallery-item"><img src="./Unit_06_Jenkins_CICD/amit_jenkins.png"><div class="gallery-caption">Pipeline Build Logs</div></div>
                 <div class="gallery-item"><img src="./Unit_06_Jenkins_CICD/amit_u6_p1.png"><div class="gallery-caption">Master/Agent Topology</div></div>
@@ -762,7 +700,7 @@ pipeline {
 
     <script>
         function switchUnit(unitId) {
-            // Un-set existing active class flags
+            // Unset existing active class flags
             const navItems = document.querySelectorAll('.nav-item');
             navItems.forEach(item => item.classList.remove('active'));
 
@@ -783,6 +721,24 @@ pipeline {
 
             // Re-center focus upward
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function startSim(termId, fullText) {
+            const termContainer = document.getElementById(termId);
+            const textElement = document.getElementById(termId + '-txt');
+            
+            termContainer.classList.add('active');
+            textElement.textContent = "";
+
+            let index = 0;
+            function typeNextChar() {
+                if (index < fullText.length) {
+                    textElement.textContent += fullText.charAt(index);
+                    index++;
+                    setTimeout(typeNextChar, 18);
+                }
+            }
+            typeNextChar();
         }
     </script>
 </body>
