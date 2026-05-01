@@ -93,23 +93,24 @@ docker rm amit_web_server
 ```
 
 ### Terminal Demonstration (Amit Example)
-![Amit terminal running basic docker commands](file:///c:/Users/amita/myprojects/githubdevops/Unit_01_DevOps_and_Containers/amit_docker_cli.png)
+![Amit terminal running basic docker commands](./amit_docker_cli.png)
 
 ## 📸 Complete Unit 1 Visual Gallery (8 Images Total)
 
 ````carousel
-![Container vs VM Comparison Architecture](file:///c:/Users/amita/myprojects/githubdevops/Unit_01_DevOps_and_Containers/amit_u1_p1.png)
+![Container vs VM Comparison Architecture](./amit_u1_p1.png)
 <!-- slide -->
-![Linux Namespaces Process Isolation](file:///c:/Users/amita/myprojects/githubdevops/Unit_01_DevOps_and_Containers/amit_u1_p2.png)
+![Linux Namespaces Process Isolation](./amit_u1_p2.png)
 <!-- slide -->
-![Control Groups (cgroups) Resource Limits](file:///c:/Users/amita/myprojects/githubdevops/Unit_01_DevOps_and_Containers/amit_u1_p3.png)
+![Control Groups (cgroups) Resource Limits](./amit_u1_p3.png)
 <!-- slide -->
-![Docker Daemon Architecture Overview](file:///c:/Users/amita/myprojects/githubdevops/Unit_01_DevOps_and_Containers/amit_u1_p4.png)
+![Docker Daemon Architecture Overview](./amit_u1_p4.png)
 <!-- slide -->
-![Terminal Output: Docker Pull Nginx](file:///c:/Users/amita/myprojects/githubdevops/Unit_01_DevOps_and_Containers/amit_u1_p5.png)
+![Terminal Output: Docker Pull Nginx](./amit_u1_p5.png)
 <!-- slide -->
-![Terminal Output: Docker Run Detached](file:///c:/Users/amita/myprojects/githubdevops/Unit_01_DevOps_and_Containers/amit_u1_p6.png)
+![Terminal Output: Docker Run Detached](./amit_u1_p6.png)
 <!-- slide -->
-![Terminal Output: List Docker Images](file:///c:/Users/amita/myprojects/githubdevops/Unit_01_DevOps_and_Containers/amit_u1_p7.png)
+![Terminal Output: List Docker Images](./amit_u1_p7.png)
 ````
+
 

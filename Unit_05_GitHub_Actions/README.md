@@ -101,23 +101,24 @@ jobs:
 ```
 
 ### GitHub Actions Demonstration (Amit Example)
-![Amit terminal running github actions or web ui](file:///c:/Users/amita/myprojects/githubdevops/Unit_05_GitHub_Actions/amit_github_actions.png)
+![Amit terminal running github actions or web ui](./amit_github_actions.png)
 
 ## 📸 Complete Unit 5 Visual Gallery (8 Images Total)
 
 ````carousel
-![GitHub Actions Workflow Directory Topology](file:///c:/Users/amita/myprojects/githubdevops/Unit_05_GitHub_Actions/amit_u5_p1.png)
+![GitHub Actions Workflow Directory Topology](./amit_u5_p1.png)
 <!-- slide -->
-![Jobs Matrix Strategy Execution](file:///c:/Users/amita/myprojects/githubdevops/Unit_05_GitHub_Actions/amit_u5_p2.png)
+![Jobs Matrix Strategy Execution](./amit_u5_p2.png)
 <!-- slide -->
-![GitHub Marketplace Actions List](file:///c:/Users/amita/myprojects/githubdevops/Unit_05_GitHub_Actions/amit_u5_p3.png)
+![GitHub Marketplace Actions List](./amit_u5_p3.png)
 <!-- slide -->
-![GitHub-Hosted Runners Overview](file:///c:/Users/amita/myprojects/githubdevops/Unit_05_GitHub_Actions/amit_u5_p4.png)
+![GitHub-Hosted Runners Overview](./amit_u5_p4.png)
 <!-- slide -->
-![Docker Image Build & Push Job Details](file:///c:/Users/amita/myprojects/githubdevops/Unit_05_GitHub_Actions/amit_u5_p5.png)
+![Docker Image Build & Push Job Details](./amit_u5_p5.png)
 <!-- slide -->
-![Caching Mechanism Workflow Configuration](file:///c:/Users/amita/myprojects/githubdevops/Unit_05_GitHub_Actions/amit_u5_p6.png)
+![Caching Mechanism Workflow Configuration](./amit_u5_p6.png)
 <!-- slide -->
-![End-to-End Multi-Job CI Build Pipeline](file:///c:/Users/amita/myprojects/githubdevops/Unit_05_GitHub_Actions/amit_u5_p7.png)
+![End-to-End Multi-Job CI Build Pipeline](./amit_u5_p7.png)
 ````
+
 

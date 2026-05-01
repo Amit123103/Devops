@@ -147,23 +147,24 @@ mvn test
 ```
 
 ### Maven Integration Demonstration (Amit Example)
-![Amit terminal running mvn clean package](file:///c:/Users/amita/myprojects/githubdevops/Unit_04_Maven_Automation/amit_maven.png)
+![Amit terminal running mvn clean package](./amit_maven.png)
 
 ## 📸 Complete Unit 4 Visual Gallery (8 Images Total)
 
 ````carousel
-![Maven Build Lifecycle Graph](file:///c:/Users/amita/myprojects/githubdevops/Unit_04_Maven_Automation/amit_u4_p1.png)
+![Maven Build Lifecycle Graph](./amit_u4_p1.png)
 <!-- slide -->
-![Maven Project Directory Layout](file:///c:/Users/amita/myprojects/githubdevops/Unit_04_Maven_Automation/amit_u4_p2.png)
+![Maven Project Directory Layout](./amit_u4_p2.png)
 <!-- slide -->
-![Transitive Dependency Graph](file:///c:/Users/amita/myprojects/githubdevops/Unit_04_Maven_Automation/amit_u4_p3.png)
+![Transitive Dependency Graph](./amit_u4_p3.png)
 <!-- slide -->
-![Maven Plugin Execution Structure](file:///c:/Users/amita/myprojects/githubdevops/Unit_04_Maven_Automation/amit_u4_p4.png)
+![Maven Plugin Execution Structure](./amit_u4_p4.png)
 <!-- slide -->
-![Terminal Output: Mvn Clean Test Output](file:///c:/Users/amita/myprojects/githubdevops/Unit_04_Maven_Automation/amit_u4_p5.png)
+![Terminal Output: Mvn Clean Test Output](./amit_u4_p5.png)
 <!-- slide -->
-![Terminal Output: Packaging Application Jar](file:///c:/Users/amita/myprojects/githubdevops/Unit_04_Maven_Automation/amit_u4_p6.png)
+![Terminal Output: Packaging Application Jar](./amit_u4_p6.png)
 <!-- slide -->
-![Docker Multi-Stage Build Pipeline](file:///c:/Users/amita/myprojects/githubdevops/Unit_04_Maven_Automation/amit_u4_p7.png)
+![Docker Multi-Stage Build Pipeline](./amit_u4_p7.png)
 ````
+
 
