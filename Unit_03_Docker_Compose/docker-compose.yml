@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: amit_mysql_service
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root_secret_pwd
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress_usr
+      MYSQL_PASSWORD: wordpress_pwd
+    volumes:
+      - wordpress_db_data:/var/lib/mysql
+    networks:
+      - internal_network
+
+  wordpress:
+    image: wordpress:latest
+    container_name: amit_wordpress_service
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress_usr
+      WORDPRESS_DB_PASSWORD: wordpress_pwd
+      WORDPRESS_DB_NAME: wordpress
+    depends_on:
+      - db
+    volumes:
+      - wordpress_app_data:/var/www/html
+    networks:
+      - internal_network
+
+volumes:
+  wordpress_db_data:
+    driver: local
+  wordpress_app_data:
+    driver: local
+
+networks:
+  internal_network:
+    driver: bridge
