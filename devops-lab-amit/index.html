@@ -7,16 +7,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #050505;
-            --sidebar-bg: rgba(12, 12, 12, 0.85);
-            --panel-bg: rgba(21, 21, 21, 0.65);
+            --bg-color: #000000;
+            --sidebar-bg: rgba(10, 10, 10, 0.85);
+            --panel-bg: rgba(18, 18, 18, 0.7);
             --accent: #ffffff;
-            --accent-gradient: linear-gradient(135deg, #ffffff 0%, #a3a3a3 100%);
+            --accent-gradient: linear-gradient(135deg, #ffffff 0%, #737373 100%);
             --text-main: #f5f5f5;
-            --text-muted: #737373;
+            --text-muted: #a3a3a3;
             --border-color: rgba(255, 255, 255, 0.08);
-            --card-bg: rgba(255, 255, 255, 0.02);
-            --terminal-bg: #0c0c0c;
+            --card-bg: rgba(255, 255, 255, 0.01);
+            --terminal-bg: #0d0d0d;
         }
 
         * {
@@ -39,15 +39,15 @@
             content: "";
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.02) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.015) 0%, transparent 50%);
+            background: radial-gradient(circle at 15% 25%, rgba(255, 255, 255, 0.03) 0%, transparent 40%),
+                        radial-gradient(circle at 85% 75%, rgba(255, 255, 255, 0.02) 0%, transparent 40%);
             z-index: -1;
-            animation: gradientShift 12s ease-in-out infinite alternate;
+            animation: pulseBg 10s ease-in-out infinite alternate;
         }
 
-        @keyframes gradientShift {
+        @keyframes pulseBg {
             0% { transform: scale(1); }
-            100% { transform: scale(1.05); }
+            100% { transform: scale(1.04); }
         }
 
         ::-webkit-scrollbar {
@@ -58,14 +58,14 @@
             background: transparent;
         }
         ::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.12);
             border-radius: 10px;
         }
 
         .sidebar {
             width: 340px;
             background: var(--sidebar-bg);
-            backdrop-filter: blur(25px);
+            backdrop-filter: blur(20px);
             border-right: 1px solid var(--border-color);
             height: 100vh;
             position: fixed;
@@ -121,11 +121,11 @@
         }
 
         .nav-item a:hover, .nav-item.active a {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.04);
             color: var(--text-main);
-            border-color: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.2);
             transform: translateX(6px);
-            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.03);
+            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.02);
         }
 
         .main-content {
@@ -189,7 +189,7 @@
 
         .manual-section {
             background: rgba(255, 255, 255, 0.01);
-            border: 1px dashed rgba(255, 255, 255, 0.12);
+            border: 1px dashed rgba(255, 255, 255, 0.1);
             border-radius: 16px;
             padding: 36px;
             margin: 40px 0;
@@ -242,11 +242,11 @@
 
         .action-btn:hover {
             transform: scale(1.02) translateY(-3px);
-            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.35);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
         }
 
         pre {
-            background: #0f0f0f;
+            background: #0d0d0d;
             border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 14px;
             padding: 24px;
@@ -302,6 +302,48 @@
         .terminal-title { color: #525252; font-size: 13px; margin-left: auto; text-transform: uppercase; font-weight: 700; }
         .terminal-body { line-height: 1.8; font-size: 14px; white-space: pre-wrap; color: #ffffff; }
 
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            aspect-ratio: 16/9;
+            background: rgba(0,0,0,0.3);
+        }
+
+        .gallery-item:hover {
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: scale(1.03);
+            box-shadow: 0 15px 35px rgba(255,255,255,0.06);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.95));
+            color: #fff;
+            font-size: 13px;
+            padding: 12px 16px;
+            font-weight: 600;
+        }
+
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes slideUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -335,7 +377,7 @@
     <main class="main-content">
         <div class="header-section">
             <h2>Amit's Master DevOps Platform</h2>
-            <p>Redesigned completely with an ultra-premium black & white aesthetic, animations, and interactive modules.</p>
+            <p>Your production-quality suite for continuous integration and pipeline management completely redesigned.</p>
         </div>
 
         <!-- UNIT 0: COMPLETE SETUP -->
@@ -380,6 +422,18 @@
                 </div>
                 <div class="terminal-body" id="term1-txt"></div>
             </div>
+
+            <h4>📸 Visual Demonstrations (8 Images)</h4>
+            <div class="image-gallery">
+                <div class="gallery-item"><img src="../Unit_01_DevOps_and_Containers/amit_docker_cli.png"><div class="gallery-caption">CLI Core</div></div>
+                <div class="gallery-item"><img src="../Unit_01_DevOps_and_Containers/amit_u1_p1.png"><div class="gallery-caption">Infrastructure Setup</div></div>
+                <div class="gallery-item"><img src="../Unit_01_DevOps_and_Containers/amit_u1_p2.png"><div class="gallery-caption">Namespace Bounds</div></div>
+                <div class="gallery-item"><img src="../Unit_01_DevOps_and_Containers/amit_u1_p3.png"><div class="gallery-caption">cgroups CPU Limits</div></div>
+                <div class="gallery-item"><img src="../Unit_01_DevOps_and_Containers/amit_u1_p4.png"><div class="gallery-caption">Daemon Architecture</div></div>
+                <div class="gallery-item"><img src="../Unit_01_DevOps_and_Containers/amit_u1_p5.png"><div class="gallery-caption">Pulling Layers</div></div>
+                <div class="gallery-item"><img src="../Unit_01_DevOps_and_Containers/amit_u1_p6.png"><div class="gallery-caption">Container Statuses</div></div>
+                <div class="gallery-item"><img src="../Unit_01_DevOps_and_Containers/amit_u1_p7.png"><div class="gallery-caption">Workspace Overview</div></div>
+            </div>
         </section>
 
         <!-- UNIT 2: DOCKERFILE -->
@@ -397,6 +451,18 @@
                     <span class="terminal-title">Simulation Console</span>
                 </div>
                 <div class="terminal-body" id="term2-txt"></div>
+            </div>
+
+            <h4>📸 Visual Demonstrations (8 Images)</h4>
+            <div class="image-gallery">
+                <div class="gallery-item"><img src="../Unit_02_Image_Building/amit_docker_build.png"><div class="gallery-caption">Build Workflow</div></div>
+                <div class="gallery-item"><img src="../Unit_02_Image_Building/amit_u2_p1.png"><div class="gallery-caption">Read-Only Layering</div></div>
+                <div class="gallery-item"><img src="../Unit_02_Image_Building/amit_u2_p2.png"><div class="gallery-caption">Image Optimization</div></div>
+                <div class="gallery-item"><img src="../Unit_02_Image_Building/amit_u2_p3.png"><div class="gallery-caption">Building Images</div></div>
+                <div class="gallery-item"><img src="../Unit_02_Image_Building/amit_u2_p4.png"><div class="gallery-caption">Image Tagging</div></div>
+                <div class="gallery-item"><img src="../Unit_02_Image_Building/amit_u2_p5.png"><div class="gallery-caption">Isolated Interfaces</div></div>
+                <div class="gallery-item"><img src="../Unit_02_Image_Building/amit_u2_p6.png"><div class="gallery-caption">Persistent Volumes</div></div>
+                <div class="gallery-item"><img src="../Unit_02_Image_Building/amit_u2_p7.png"><div class="gallery-caption">Pushing to Hub</div></div>
             </div>
         </section>
 
@@ -416,6 +482,18 @@
                 </div>
                 <div class="terminal-body" id="term3-txt"></div>
             </div>
+
+            <h4>📸 Visual Demonstrations (8 Images)</h4>
+            <div class="image-gallery">
+                <div class="gallery-item"><img src="../Unit_03_Docker_Compose/amit_docker_compose.png"><div class="gallery-caption">Stack Orchestration</div></div>
+                <div class="gallery-item"><img src="../Unit_03_Docker_Compose/amit_u3_p1.png"><div class="gallery-caption">Topology Blueprints</div></div>
+                <div class="gallery-item"><img src="../Unit_03_Docker_Compose/amit_u3_p2.png"><div class="gallery-caption">Ingress Points</div></div>
+                <div class="gallery-item"><img src="../Unit_03_Docker_Compose/amit_u3_p3.png"><div class="gallery-caption">YAML Directives</div></div>
+                <div class="gallery-item"><img src="../Unit_03_Docker_Compose/amit_u3_p4.png"><div class="gallery-caption">Persistence Tiers</div></div>
+                <div class="gallery-item"><img src="../Unit_03_Docker_Compose/amit_u3_p5.png"><div class="gallery-caption">Scaling up Services</div></div>
+                <div class="gallery-item"><img src="../Unit_03_Docker_Compose/amit_u3_p6.png"><div class="gallery-caption">Process Metrics</div></div>
+                <div class="gallery-item"><img src="../Unit_03_Docker_Compose/amit_u3_p7.png"><div class="gallery-caption">Destruction Commands</div></div>
+            </div>
         </section>
 
         <!-- UNIT 4 -->
@@ -433,6 +511,18 @@
                     <span class="terminal-title">Simulation Console</span>
                 </div>
                 <div class="terminal-body" id="term4-txt"></div>
+            </div>
+
+            <h4>📸 Visual Demonstrations (8 Images)</h4>
+            <div class="image-gallery">
+                <div class="gallery-item"><img src="../Unit_04_Maven_Automation/amit_maven.png"><div class="gallery-caption">Build Processes</div></div>
+                <div class="gallery-item"><img src="../Unit_04_Maven_Automation/amit_u4_p1.png"><div class="gallery-caption">Build Cycles</div></div>
+                <div class="gallery-item"><img src="../Unit_04_Maven_Automation/amit_u4_p2.png"><div class="gallery-caption">Directory Tree</div></div>
+                <div class="gallery-item"><img src="../Unit_04_Maven_Automation/amit_u4_p3.png"><div class="gallery-caption">Resolved Coordinates</div></div>
+                <div class="gallery-item"><img src="../Unit_04_Maven_Automation/amit_u4_p4.png"><div class="gallery-caption">System Plugins</div></div>
+                <div class="gallery-item"><img src="../Unit_04_Maven_Automation/amit_u4_p5.png"><div class="gallery-caption">Tests Report</div></div>
+                <div class="gallery-item"><img src="../Unit_04_Maven_Automation/amit_u4_p6.png"><div class="gallery-caption">Packaged Archives</div></div>
+                <div class="gallery-item"><img src="../Unit_04_Maven_Automation/amit_u4_p7.png"><div class="gallery-caption">Compilation Pipeline</div></div>
             </div>
         </section>
 
@@ -452,6 +542,18 @@
                 </div>
                 <div class="terminal-body" id="term5-txt"></div>
             </div>
+
+            <h4>📸 Visual Demonstrations (8 Images)</h4>
+            <div class="image-gallery">
+                <div class="gallery-item"><img src="../Unit_05_GitHub_Actions/amit_github_actions.png"><div class="gallery-caption">GitHub Outputs</div></div>
+                <div class="gallery-item"><img src="../Unit_05_GitHub_Actions/amit_u5_p1.png"><div class="gallery-caption">Workspace Configuration</div></div>
+                <div class="gallery-item"><img src="../Unit_05_GitHub_Actions/amit_u5_p2.png"><div class="gallery-caption">Execution Matrix</div></div>
+                <div class="gallery-item"><img src="../Unit_05_GitHub_Actions/amit_u5_p3.png"><div class="gallery-caption">Task Marketplace</div></div>
+                <div class="gallery-item"><img src="../Unit_05_GitHub_Actions/amit_u5_p4.png"><div class="gallery-caption">Worker Runners</div></div>
+                <div class="gallery-item"><img src="../Unit_05_GitHub_Actions/amit_u5_p5.png"><div class="gallery-caption">Push Operations</div></div>
+                <div class="gallery-item"><img src="../Unit_05_GitHub_Actions/amit_u5_p6.png"><div class="gallery-caption">Caching Logic</div></div>
+                <div class="gallery-item"><img src="../Unit_05_GitHub_Actions/amit_u5_p7.png"><div class="gallery-caption">Delivery Pipelines</div></div>
+            </div>
         </section>
 
         <!-- UNIT 6 -->
@@ -469,6 +571,18 @@
                     <span class="terminal-title">Simulation Console</span>
                 </div>
                 <div class="terminal-body" id="term6-txt"></div>
+            </div>
+
+            <h4>📸 Visual Demonstrations (8 Images)</h4>
+            <div class="image-gallery">
+                <div class="gallery-item"><img src="../Unit_06_Jenkins_CICD/amit_jenkins.png"><div class="gallery-caption">Automation Output</div></div>
+                <div class="gallery-item"><img src="../Unit_06_Jenkins_CICD/amit_u6_p1.png"><div class="gallery-caption">Distributed Topology</div></div>
+                <div class="gallery-item"><img src="../Unit_06_Jenkins_CICD/amit_u6_p2.png"><div class="gallery-caption">Pipeline Types</div></div>
+                <div class="gallery-item"><img src="../Unit_06_Jenkins_CICD/amit_u6_p3.png"><div class="gallery-caption">Declarative DSL</div></div>
+                <div class="gallery-item"><img src="../Unit_06_Jenkins_CICD/amit_u6_p4.png"><div class="gallery-caption">Global Engines</div></div>
+                <div class="gallery-item"><img src="../Unit_06_Jenkins_CICD/amit_u6_p5.png"><div class="gallery-caption">Dynamic Execution</div></div>
+                <div class="gallery-item"><img src="../Unit_06_Jenkins_CICD/amit_u6_p6.png"><div class="gallery-caption">Hook Operations</div></div>
+                <div class="gallery-item"><img src="../Unit_06_Jenkins_CICD/amit_u6_p7.png"><div class="gallery-caption">Branch Monitors</div></div>
             </div>
         </section>
     </main>
