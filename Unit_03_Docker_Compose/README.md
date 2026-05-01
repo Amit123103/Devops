@@ -115,3 +115,22 @@ docker compose down -v
 
 ### Docker Compose Demonstration (Amit Example)
 ![Amit terminal running docker compose up](file:///c:/Users/amita/myprojects/githubdevops/Unit_03_Docker_Compose/amit_docker_compose.png)
+
+## 📸 Complete Unit 3 Visual Gallery (8 Images Total)
+
+````carousel
+![Monolithic vs Microservices Architecture](file:///c:/Users/amita/myprojects/githubdevops/Unit_03_Docker_Compose/amit_u3_p1.png)
+<!-- slide -->
+![API Gateway Architecture Layout](file:///c:/Users/amita/myprojects/githubdevops/Unit_03_Docker_Compose/amit_u3_p2.png)
+<!-- slide -->
+![YAML Structure and Validation](file:///c:/Users/amita/myprojects/githubdevops/Unit_03_Docker_Compose/amit_u3_p3.png)
+<!-- slide -->
+![Database and Web Microservices Topology](file:///c:/Users/amita/myprojects/githubdevops/Unit_03_Docker_Compose/amit_u3_p4.png)
+<!-- slide -->
+![Terminal Output: Docker Compose Build](file:///c:/Users/amita/myprojects/githubdevops/Unit_03_Docker_Compose/amit_u3_p5.png)
+<!-- slide -->
+![Terminal Output: Docker Compose Ps Status](file:///c:/Users/amita/myprojects/githubdevops/Unit_03_Docker_Compose/amit_u3_p6.png)
+<!-- slide -->
+![Terminal Output: Docker Compose Clean Up](file:///c:/Users/amita/myprojects/githubdevops/Unit_03_Docker_Compose/amit_u3_p7.png)
+````
+

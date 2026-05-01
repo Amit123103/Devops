@@ -121,3 +121,22 @@ pipeline {
 
 ### Jenkins Pipeline Demonstration (Amit Example)
 ![Amit Jenkins UI showing successful builds](file:///c:/Users/amita/myprojects/githubdevops/Unit_06_Jenkins_CICD/amit_jenkins.png)
+
+## 📸 Complete Unit 6 Visual Gallery (8 Images Total)
+
+````carousel
+![Jenkins Master/Agent Topology](file:///c:/Users/amita/myprojects/githubdevops/Unit_06_Jenkins_CICD/amit_u6_p1.png)
+<!-- slide -->
+![Pipeline Freestyle vs Scripted vs Declarative Jobs](file:///c:/Users/amita/myprojects/githubdevops/Unit_06_Jenkins_CICD/amit_u6_p2.png)
+<!-- slide -->
+![Declarative Pipeline Syntax Structure](file:///c:/Users/amita/myprojects/githubdevops/Unit_06_Jenkins_CICD/amit_u6_p3.png)
+<!-- slide -->
+![Global Tool Configuration: Maven & JDK](file:///c:/Users/amita/myprojects/githubdevops/Unit_06_Jenkins_CICD/amit_u6_p4.png)
+<!-- slide -->
+![Docker Execution Inside Jenkins Agent Node](file:///c:/Users/amita/myprojects/githubdevops/Unit_06_Jenkins_CICD/amit_u6_p5.png)
+<!-- slide -->
+![GitHub Webhook Configuration and Build Trigger](file:///c:/Users/amita/myprojects/githubdevops/Unit_06_Jenkins_CICD/amit_u6_p6.png)
+<!-- slide -->
+![Jenkins Multi-Branch CI/CD Pipeline Status](file:///c:/Users/amita/myprojects/githubdevops/Unit_06_Jenkins_CICD/amit_u6_p7.png)
+````
+

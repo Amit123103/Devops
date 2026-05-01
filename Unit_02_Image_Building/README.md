@@ -116,3 +116,22 @@ docker push amit/my-app:v1.0.0
 
 ### Image Build Demonstration (Amit Example)
 ![Amit terminal running docker build and tag](file:///c:/Users/amita/myprojects/githubdevops/Unit_02_Image_Building/amit_docker_build.png)
+
+## 📸 Complete Unit 2 Visual Gallery (8 Images Total)
+
+````carousel
+![Docker Image Layering](file:///c:/Users/amita/myprojects/githubdevops/Unit_02_Image_Building/amit_u2_p1.png)
+<!-- slide -->
+![Copy on Write Strategy](file:///c:/Users/amita/myprojects/githubdevops/Unit_02_Image_Building/amit_u2_p2.png)
+<!-- slide -->
+![Terminal Output: Dockerignore Configuration](file:///c:/Users/amita/myprojects/githubdevops/Unit_02_Image_Building/amit_u2_p3.png)
+<!-- slide -->
+![Terminal Output: Docker Tagging](file:///c:/Users/amita/myprojects/githubdevops/Unit_02_Image_Building/amit_u2_p4.png)
+<!-- slide -->
+![Custom Bridge Network Layout](file:///c:/Users/amita/myprojects/githubdevops/Unit_02_Image_Building/amit_u2_p5.png)
+<!-- slide -->
+![Volume Mounting vs Bind Mount](file:///c:/Users/amita/myprojects/githubdevops/Unit_02_Image_Building/amit_u2_p6.png)
+<!-- slide -->
+![Docker Hub Terminal Login](file:///c:/Users/amita/myprojects/githubdevops/Unit_02_Image_Building/amit_u2_p7.png)
+````
+
