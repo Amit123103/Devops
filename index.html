@@ -332,16 +332,6 @@
             white-space: pre-wrap;
         }
 
-        .terminal-cursor {
-            display: inline-block;
-            background: #fff;
-            width: 8px;
-            height: 18px;
-            animation: blink 1s step-end infinite;
-            vertical-align: middle;
-            margin-left: 4px;
-        }
-
         /* Image Display Matrix */
         .image-gallery {
             display: grid;
@@ -387,7 +377,6 @@
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes slideUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes blink { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
 
         @media (max-width: 1024px) {
             body { flex-direction: column; }
@@ -402,10 +391,11 @@
     <aside class="sidebar">
         <div class="sidebar-brand">
             <h1>Amit DevOps</h1>
-            <span>Animated Interactive Manual</span>
+            <span>Animated Lab Manual</span>
         </div>
         <ul class="nav-list">
-            <li class="nav-item active"><a href="#unit1" onclick="switchUnit('unit1')">📦 01. DevOps Infrastructure</a></li>
+            <li class="nav-item active"><a href="#setup" onclick="switchUnit('setup')">🚀 00. Setup & Practice Guide</a></li>
+            <li class="nav-item"><a href="#unit1" onclick="switchUnit('unit1')">📦 01. DevOps Infrastructure</a></li>
             <li class="nav-item"><a href="#unit2" onclick="switchUnit('unit2')">🛠️ 02. Image Building</a></li>
             <li class="nav-item"><a href="#unit3" onclick="switchUnit('unit3')">🌐 03. Docker Compose</a></li>
             <li class="nav-item"><a href="#unit4" onclick="switchUnit('unit4')">⚙️ 04. Maven Automation</a></li>
@@ -417,14 +407,52 @@
     <!-- MAIN CONTENT AREA -->
     <main class="main-content">
         <div class="header-section">
-            <h2>Amit's Step-by-Step Interactive Laboratory</h2>
-            <p>Access step-by-step guidance for every practical, complete with animated terminal outputs for full simulation.</p>
+            <h2>Amit's Master DevOps Platform</h2>
+            <p>Your one-stop comprehensive resource for DevOps practical execution, step-by-step guidance, and animated labs.</p>
         </div>
 
+        <!-- 00. SETUP AND PRACTICE GUIDE -->
+        <section id="setup" class="unit-section active">
+            <h3 class="unit-title">Unit 0: Complete Setup & Practice Guide</h3>
+            <p class="unit-intro">Your blueprint to completely install the required developer environment and master every DevOps tool in real time.</p>
+
+            <button class="action-btn" onclick="startSim('term-setup', 'amit@devops:~$ git --version\ngit version 2.40.1\namit@devops:~$ docker version\nDocker version 24.0.2, build cb74f4c\namit@devops:~$ mvn --version\nApache Maven 3.9.2\namit@devops:~$ java -version\nopenjdk version \"17.0.7\"\namit@devops:~$ echo \"All tools successfully configured! Ready to practice DevOps.\"')">▶ Run Setup Simulation Test</button>
+
+            <div id="term-setup" class="terminal-container">
+                <div class="terminal-header">
+                    <div class="terminal-dot terminal-red"></div>
+                    <div class="terminal-dot terminal-yellow"></div>
+                    <div class="terminal-dot terminal-green"></div>
+                    <span class="terminal-title">Environment Setup Test - Animated Simulation</span>
+                </div>
+                <div class="terminal-body" id="term-setup-txt"></div>
+            </div>
+
+            <div class="manual-section">
+                <h5>📖 Detailed Step-by-Step Guidance (Prerequisites Setup)</h5>
+                <div class="manual-step">
+                    <h6>Step 1: Container Tools Installation</h6>
+                    <p>Go to the official <a href="https://www.docker.com/products/docker-desktop/" target="_blank" style="color: #60a5fa;">Docker Desktop</a> website. Download and install Docker for your specific operating system (Windows/macOS/Linux). Ensure virtualization is enabled in BIOS.</p>
+                </div>
+                <div class="manual-step">
+                    <h6>Step 2: Install Java Development Kit & Maven</h6>
+                    <p>Install **OpenJDK 17**. Download **Apache Maven** and add the <code>bin/</code> folder to your system environment variables (PATH). Verify by running <code>mvn -v</code> in the terminal.</p>
+                </div>
+                <div class="manual-step">
+                    <h6>Step 3: Setup Git & Repository Controls</h6>
+                    <p>Download **Git SCM**. Initialize your GitHub profile and test synchronization using terminal pushes. Create directories for all 6 DevOps units locally to stay organized.</p>
+                </div>
+                <div class="manual-step">
+                    <h6>Step 4: Continuous Integration Engine Setup</h6>
+                    <p>Run your standalone **Jenkins** server using Docker: <code>docker run -d -p 8080:8080 -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts</code>.</p>
+                </div>
+            </div>
+        </section>
+
         <!-- UNIT 1 -->
-        <section id="unit1" class="unit-section active">
+        <section id="unit1" class="unit-section">
             <h3 class="unit-title">Unit I: Basics of DevOps Infrastructure</h3>
-            <p class="unit-intro">An analytical approach to container engines. Read step-by-step guidance and view live execution animations.</p>
+            <p class="unit-intro">Understand OS virtualization, namespaces, control groups, and CLI basics.</p>
 
             <button class="action-btn" onclick="startSim('term1', 'amit@devops:~$ docker pull nginx:alpine\nStatus: Downloaded newer image for nginx:alpine\namit@devops:~$ docker run -d --name web_server -p 80:80 nginx:alpine\nf9e18b0c223a851d0db1262ab091176b1\namit@devops:~$ docker ps\nCONTAINER ID   IMAGE          COMMAND       STATUS       PORTS\nf9e18b0c223a   nginx:alpine   \"nginx -g…\"   Up 2 sec     0.0.0.0:80->80/tcp')">▶ Run Terminal Simulation (Typewriter Animation)</button>
 
