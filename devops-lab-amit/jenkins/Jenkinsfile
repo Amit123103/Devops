@@ -1,0 +1,27 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout Source Code') {
+            steps {
+                git 'https://github.com/Amit123103/Devops.git'
+            }
+        }
+
+        stage('Build with Maven') {
+            steps {
+                dir('devops-lab-amit/maven-app') {
+                    sh 'mvn clean package'
+                }
+            }
+        }
+
+        stage('Build Container Image') {
+            steps {
+                dir('devops-lab-amit/docker') {
+                    sh 'docker build -t amit-node-app:latest .'
+                }
+            }
+        }
+    }
+}
