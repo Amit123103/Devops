@@ -3,70 +3,360 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amit's DevOps Lab Master Suite</title>
+    <title>Amit's Advanced DevOps Master Suite</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --bg-color: #060913;
+            --sidebar-bg: rgba(13, 18, 36, 0.75);
+            --panel-bg: rgba(23, 31, 59, 0.45);
+            --accent: #2563eb;
+            --accent-gradient: linear-gradient(135deg, #38bdf8 0%, #8b5cf6 100%);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.06);
+            --card-bg: rgba(255, 255, 255, 0.01);
+            --terminal-bg: #090e1d;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at top right, rgba(56, 189, 248, 0.05), transparent),
+                              radial-gradient(circle at bottom left, rgba(139, 92, 246, 0.05), transparent);
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+        }
+
+        .sidebar {
+            width: 340px;
+            background: var(--sidebar-bg);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid var(--border-color);
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            padding: 48px 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 36px;
+            z-index: 100;
+        }
+
+        .sidebar-brand h1 {
+            font-size: 26px;
+            font-weight: 800;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .sidebar-brand span {
+            font-size: 13px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+        }
+
+        .nav-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .nav-item a {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 20px;
+            color: var(--text-muted);
+            text-decoration: none;
+            border-radius: 16px;
+            font-size: 15px;
+            font-weight: 600;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid transparent;
+            background: rgba(255, 255, 255, 0.01);
+        }
+
+        .nav-item a:hover, .nav-item.active a {
+            background: rgba(56, 189, 248, 0.08);
+            color: var(--text-main);
+            border-color: rgba(56, 189, 248, 0.2);
+            transform: translateX(6px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .main-content {
+            margin-left: 340px;
+            padding: 64px 80px;
+            width: calc(100% - 340px);
+            max-width: 1250px;
+        }
+
+        .header-section {
+            margin-bottom: 56px;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .header-section h2 {
+            font-size: 46px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 14px;
+            background: linear-gradient(to right, #f8fafc, #cbd5e1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header-section p {
+            font-size: 18px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .unit-section {
+            background: var(--panel-bg);
+            backdrop-filter: blur(24px);
+            border: 1px solid var(--border-color);
+            border-radius: 28px;
+            padding: 56px;
+            margin-bottom: 56px;
+            display: none;
+            animation: slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .unit-section.active {
+            display: block;
+        }
+
+        .unit-title {
+            font-size: 36px;
+            font-weight: 800;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 24px;
+        }
+
+        .unit-intro {
+            color: var(--text-muted);
+            font-size: 17px;
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+
+        .manual-section {
+            background: rgba(0, 0, 0, 0.18);
+            border: 1px dashed rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 36px;
+            margin: 40px 0;
+            box-shadow: inset 0 1px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .manual-section h5 {
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: #38bdf8;
+        }
+
+        .manual-step {
+            margin-bottom: 24px;
+            border-left: 3px solid rgba(56, 189, 248, 0.4);
+            padding-left: 20px;
+        }
+
+        .manual-step h6 {
+            font-size: 17px;
+            font-weight: 700;
+            color: #60a5fa;
+            margin-bottom: 8px;
+        }
+
+        .manual-step p {
+            font-size: 15px;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--accent-gradient);
+            color: #fff;
+            font-weight: 700;
+            font-size: 15px;
+            padding: 14px 28px;
+            border-radius: 14px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-bottom: 28px;
+            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.25);
+        }
+
+        .action-btn:hover {
+            transform: scale(1.03) translateY(-3px);
+            box-shadow: 0 10px 30px rgba(56, 189, 248, 0.45);
+        }
+
+        pre {
+            background: rgba(9, 14, 29, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 24px;
+            overflow-x: auto;
+            margin: 28px 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            line-height: 1.7;
+            color: #cbd5e1;
+        }
+
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(255, 255, 255, 0.04);
+            color: #38bdf8;
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 13.5px;
+        }
+
+        .terminal-container {
+            display: none;
+            background: var(--terminal-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 28px;
+            margin: 28px 0;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+            font-family: 'JetBrains Mono', monospace;
+            color: #38bdf8;
+            min-height: 240px;
+            animation: slideUp 0.4s ease;
+            position: relative;
+        }
+
+        .terminal-container.active {
+            display: block;
+        }
+
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 18px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            padding-bottom: 14px;
+        }
+
+        .terminal-dot { width: 14px; height: 14px; border-radius: 50%; }
+        .terminal-red { background: #ef4444; }
+        .terminal-yellow { background: #f59e0b; }
+        .terminal-green { background: #10b981; }
+        .terminal-title { color: #64748b; font-size: 13px; margin-left: auto; text-transform: uppercase; font-weight: 700; }
+        .terminal-body { line-height: 1.8; font-size: 14px; white-space: pre-wrap; color: #a7f3d0; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 1024px) {
+            body { flex-direction: column; }
+            .sidebar { width: 100%; height: auto; position: relative; border-right: none; border-bottom: 1px solid var(--border-color); }
+            .main-content { margin-left: 0; width: 100%; padding: 40px 24px; }
+        }
+    </style>
 </head>
 <body>
+
+    <!-- SIDEBAR NAVIGATION -->
     <aside class="sidebar">
         <div class="sidebar-brand">
-            <h1>DevOps Lab</h1>
-            <span>Amit's Production Suite</span>
+            <h1>Amit DevOps</h1>
+            <span>Animated Interactive Suite</span>
         </div>
         <ul class="nav-list">
-            <li class="nav-item active"><a href="#welcome" onclick="switchTab('welcome')">🏠 Home & Setup</a></li>
-            <li class="nav-item"><a href="#unit1" onclick="switchTab('unit1')">📦 01. Containers Core</a></li>
-            <li class="nav-item"><a href="#unit2" onclick="switchTab('unit2')">🛠️ 02. Image Building</a></li>
-            <li class="nav-item"><a href="#unit3" onclick="switchTab('unit3')">🌐 03. Docker Compose</a></li>
-            <li class="nav-item"><a href="#unit4" onclick="switchTab('unit4')">⚙️ 04. Maven Lifecycle</a></li>
-            <li class="nav-item"><a href="#unit5" onclick="switchTab('unit5')">🚀 05. GitHub Actions</a></li>
-            <li class="nav-item"><a href="#unit6" onclick="switchTab('unit6')">🤖 06. Jenkins Pipelines</a></li>
+            <li class="nav-item active"><a href="#setup" onclick="switchUnit('setup')">🚀 00. Setup & Practice Guide</a></li>
+            <li class="nav-item"><a href="#unit1" onclick="switchUnit('unit1')">📦 01. DevOps Infrastructure</a></li>
+            <li class="nav-item"><a href="#unit2" onclick="switchUnit('unit2')">🛠️ 02. Image Building</a></li>
+            <li class="nav-item"><a href="#unit3" onclick="switchUnit('unit3')">🌐 03. Docker Compose</a></li>
+            <li class="nav-item"><a href="#unit4" onclick="switchUnit('unit4')">⚙️ 04. Maven Automation</a></li>
+            <li class="nav-item"><a href="#unit5" onclick="switchUnit('unit5')">🚀 05. GitHub Actions</a></li>
+            <li class="nav-item"><a href="#unit6" onclick="switchUnit('unit6')">🤖 06. Jenkins CI/CD</a></li>
         </ul>
     </aside>
 
+    <!-- MAIN CONTENT AREA -->
     <main class="main-content">
         <div class="header-section">
-            <h2>Amit's Complete DevOps Lab Environment</h2>
-            <p>Practical instructions, copyable code snippets, theory docs, and full environment configurations.</p>
+            <h2>Amit's Master DevOps Platform</h2>
+            <p>Your production-quality suite for continuous integration and pipeline management completely redesigned.</p>
         </div>
 
-        <!-- 00. WELCOME / SETUP SECTION -->
-        <section id="welcome" class="unit-section active">
-            <h3 class="unit-title">🏠 Complete Setup & Project Guide</h3>
-            <p class="unit-intro">This platform serves as a production-quality DevOps workspace for running local experiments and exploring containerization pipelines.</p>
-            
-            <div class="card-grid">
-                <div class="feature-card">
-                    <h4>Step 1: Install Local Engines</h4>
-                    <p>Make sure Docker Desktop, Git, Java JDK 17, and Apache Maven are properly configured in your system paths.</p>
+        <!-- UNIT 0: COMPLETE SETUP -->
+        <section id="setup" class="unit-section active">
+            <h3 class="unit-title">Unit 0: Setup & Complete Practice Guide</h3>
+            <p class="unit-intro">Your premium blueprinted local environments setup guide.</p>
+
+            <button class="action-btn" onclick="startSim('term-setup', 'setup')">▶ Run Setup Simulation Test</button>
+
+            <div id="term-setup" class="terminal-container">
+                <div class="terminal-header">
+                    <div class="terminal-dot terminal-red"></div>
+                    <div class="terminal-dot terminal-yellow"></div>
+                    <div class="terminal-dot terminal-green"></div>
+                    <span class="terminal-title">Simulation Console</span>
                 </div>
-                <div class="feature-card">
-                    <h4>Step 2: Initialize Lab Projects</h4>
-                    <p>Create local folders for testing and use copyable code snippets directly inside your terminal.</p>
-                </div>
+                <div class="terminal-body" id="term-setup-txt"></div>
             </div>
 
             <div class="manual-section">
-                <h5>📋 Comprehensive Tools Prerequisites</h5>
+                <h5>📋 Prerequisites Setup</h5>
                 <div class="manual-step">
-                    <h6>1. Container Tools</h6>
-                    <p>Verify installation via <code>docker version</code> in your system shell.</p>
-                </div>
-                <div class="manual-step">
-                    <h6>2. Java Development & Build Automation</h6>
-                    <p>Verify setup by typing <code>java -version</code> and <code>mvn -version</code>.</p>
-                </div>
-                <div class="manual-step">
-                    <h6>3. Local Jenkins Instance</h6>
-                    <p>Launch Jenkins within minutes using Docker: <code>docker run -d -p 8080:8080 jenkins/jenkins:lts</code>.</p>
+                    <h6>Container Frameworks setup</h6>
+                    <p>Download from the Docker Desktop website completely.</p>
                 </div>
             </div>
         </section>
 
-        <!-- UNIT 1: CONTAINERS & DOCKER FUNDAMENTALS -->
+        <!-- UNIT 1: BASICS -->
         <section id="unit1" class="unit-section">
-            <h3 class="unit-title">Unit I: Containers Core & Docker Basics</h3>
-            <p class="unit-intro">Explore hypervisor abstraction vs kernel isolation primitives (Namespaces, cgroups), image layering, and process sandboxing.</p>
+            <h3 class="unit-title">Unit I: Basics of DevOps Infrastructure</h3>
+            <p class="unit-intro">Understand hypervisor abstraction, namespaces, cgroups, and isolated CLI controls completely.</p>
 
             <button class="action-btn" onclick="startSim('term1', 'u1')">▶ Run Terminal Simulation (Typewriter Animation)</button>
 
@@ -79,35 +369,12 @@
                 </div>
                 <div class="terminal-body" id="term1-txt"></div>
             </div>
-
-            <div class="manual-section">
-                <h5>🛠️ Experiment 1: Running Isolated Nginx Workloads</h5>
-                <p><strong>Aim:</strong> Setup, configure, and operate a containerized web service using Docker.</p>
-                <div class="manual-step">
-                    <h6>Prerequisites:</h6>
-                    <p>Ensure that Docker Desktop or a Linux host daemon is operational.</p>
-                </div>
-                <div class="manual-step">
-                    <h6>Execution Steps:</h6>
-                    <pre>
-# Pulling official lightweight base
-docker pull nginx:alpine
-
-# Run containerized service in background mode
-docker run -d --name amit_web_container -p 8080:80 nginx:alpine
-
-# Print running container statuses
-docker ps -a
-                    </pre>
-                </div>
-                <p><strong>Expected Output:</strong> The web container starts, binds to port 8080, and renders the default Nginx index page at <code>http://localhost:8080</code>.</p>
-            </div>
         </section>
 
-        <!-- UNIT 2: DOCKERFILE & CONTAINER MANAGEMENT -->
+        <!-- UNIT 2: DOCKERFILE -->
         <section id="unit2" class="unit-section">
-            <h3 class="unit-title">Unit II: Advanced Image Building & Storage</h3>
-            <p class="unit-intro">Optimize production builds with efficient read-only layering, local caches, and bind mounts.</p>
+            <h3 class="unit-title">Unit II: Image Building & Container Management</h3>
+            <p class="unit-intro">Optimize production builds with lean layering caches completely.</p>
 
             <button class="action-btn" onclick="startSim('term2', 'u2')">▶ Run Terminal Simulation (Typewriter Animation)</button>
 
@@ -120,31 +387,12 @@ docker ps -a
                 </div>
                 <div class="terminal-body" id="term2-txt"></div>
             </div>
-
-            <div class="manual-section">
-                <h5>🛠️ Experiment 2: Custom Node.js Microservice Generation</h5>
-                <p><strong>Aim:</strong> Build, tag, and persist customized local Node.js application images using a Dockerfile.</p>
-                <div class="manual-step">
-                    <h6>Execution Steps:</h6>
-                    <pre>
-# Navigate to the context directory
-cd docker/
-
-# Compile the target Dockerfile image
-docker build -t amit-node-app:v1 .
-
-# Run the newly generated custom image
-docker run -d --name node_test -p 3000:3000 amit-node-app:v1
-                    </pre>
-                </div>
-                <p><strong>Expected Output:</strong> Continuous console updates output build steps and successful tag confirmations.</p>
-            </div>
         </section>
 
-        <!-- UNIT 3: DOCKER COMPOSE & MICROSERVICES -->
+        <!-- UNIT 3 -->
         <section id="unit3" class="unit-section">
-            <h3 class="unit-title">Unit III: Microservices with Docker Compose</h3>
-            <p class="unit-intro">Coordinate multi-tier enterprise services seamlessly using Docker Compose.</p>
+            <h3 class="unit-title">Unit III: Docker Compose & Microservices</h3>
+            <p class="unit-intro">Coordinate microservice environments via unified YAML declarations completely.</p>
 
             <button class="action-btn" onclick="startSim('term3', 'u3')">▶ Run Terminal Simulation (Typewriter Animation)</button>
 
@@ -157,28 +405,12 @@ docker run -d --name node_test -p 3000:3000 amit-node-app:v1
                 </div>
                 <div class="terminal-body" id="term3-txt"></div>
             </div>
-
-            <div class="manual-section">
-                <h5>🛠️ Experiment 3: WordPress & MySQL Single-Script Deployment</h5>
-                <p><strong>Aim:</strong> Launching decoupled backend and web tier microservices using a unified script.</p>
-                <div class="manual-step">
-                    <h6>Execution Steps:</h6>
-                    <pre>
-# Launch service stacks
-docker compose -f compose/wordpress.yml up -d
-
-# Verify operational running containers
-docker compose -f compose/wordpress.yml ps
-                    </pre>
-                </div>
-                <p><strong>Expected Output:</strong> Dynamic isolation network created, database starts up, and WordPress binds to port 8080.</p>
-            </div>
         </section>
 
-        <!-- UNIT 4: MAVEN BUILD AUTOMATION -->
+        <!-- UNIT 4 -->
         <section id="unit4" class="unit-section">
-            <h3 class="unit-title">Unit IV: Maven Lifecycle Automation</h3>
-            <p class="unit-intro">Learn about the Maven Project Object Model (POM), transitive dependency resolution, and multi-stage JRE containerization.</p>
+            <h3 class="unit-title">Unit IV: Maven Build Automation</h3>
+            <p class="unit-intro">Manage software cycles, transitive dependencies, and compilation automation completely.</p>
 
             <button class="action-btn" onclick="startSim('term4', 'u4')">▶ Run Terminal Simulation (Typewriter Animation)</button>
 
@@ -191,28 +423,12 @@ docker compose -f compose/wordpress.yml ps
                 </div>
                 <div class="terminal-body" id="term4-txt"></div>
             </div>
-
-            <div class="manual-section">
-                <h5>🛠️ Experiment 4: Compiling Java Maven Applications</h5>
-                <p><strong>Aim:</strong> Manage dependency resolution, tests execution, and package builds using Maven coordinates.</p>
-                <div class="manual-step">
-                    <h6>Execution Steps:</h6>
-                    <pre>
-# Navigate to project location
-cd maven-app/
-
-# Package source files into an executable jar file
-mvn clean package
-                    </pre>
-                </div>
-                <p><strong>Expected Output:</strong> Maven downloads all defined dependencies, executes standard tests, and generates a packaged artifact JAR.</p>
-            </div>
         </section>
 
-        <!-- UNIT 5: GITHUB ACTIONS CI -->
+        <!-- UNIT 5 -->
         <section id="unit5" class="unit-section">
-            <h3 class="unit-title">Unit V: Continuous Integration with GitHub Actions</h3>
-            <p class="unit-intro">Build robust multi-job CI workflow pipelines directly within your GitHub repository.</p>
+            <h3 class="unit-title">Unit V: CI with GitHub Actions</h3>
+            <p class="unit-intro">Run multi-step continuous deployment jobs completely on cloud worker nodes.</p>
 
             <button class="action-btn" onclick="startSim('term5', 'u5')">▶ Run Terminal Simulation (Typewriter Animation)</button>
 
@@ -225,31 +441,12 @@ mvn clean package
                 </div>
                 <div class="terminal-body" id="term5-txt"></div>
             </div>
-
-            <div class="manual-section">
-                <h5>🛠️ Experiment 5: Workflow Pipeline Integration</h5>
-                <p><strong>Aim:</strong> Trigger automated test validations, compilation, and Docker builds on code commits.</p>
-                <div class="manual-step">
-                    <h6>Execution Steps:</h6>
-                    <pre>
-# Stage code changes
-git add .
-
-# Commit code changes
-git commit -m "Added continuous integration workflows"
-
-# Push to origin
-git push origin main
-                    </pre>
-                </div>
-                <p><strong>Expected Output:</strong> GitHub captures events and executes testing and image builds automatically.</p>
-            </div>
         </section>
 
-        <!-- UNIT 6: JENKINS PIPELINES -->
+        <!-- UNIT 6 -->
         <section id="unit6" class="unit-section">
-            <h3 class="unit-title">Unit VI: Continuous Integration with Jenkins</h3>
-            <p class="unit-intro">Establish multi-stage delivery pipelines utilizing versioned declarative scripts.</p>
+            <h3 class="unit-title">Unit VI: CI/CD with Jenkins</h3>
+            <p class="unit-intro">Establish distributed Worker-based pipelines completely using Groovy steps.</p>
 
             <button class="action-btn" onclick="startSim('term6', 'u6')">▶ Run Terminal Simulation (Typewriter Animation)</button>
 
@@ -262,22 +459,64 @@ git push origin main
                 </div>
                 <div class="terminal-body" id="term6-txt"></div>
             </div>
-
-            <div class="manual-section">
-                <h5>🛠️ Experiment 6: Declarative Pipelines Implementation</h5>
-                <p><strong>Aim:</strong> Run step-by-step CI/CD automation tasks in isolated agent node environments.</p>
-                <div class="manual-step">
-                    <h6>Execution Steps:</h6>
-                    <pre>
-# Point Jenkins to your repository url
-# Execute new build pipelines via the dashboard
-                    </pre>
-                </div>
-                <p><strong>Expected Output:</strong> Stages compile, validate tests, package binaries, and confirm successful pipeline completions.</p>
-            </div>
         </section>
     </main>
 
-    <script src="script.js"></script>
+    <script>
+        const simulations = {
+            'setup': 'amit@devops:~$ git --version\ngit version 2.40.1\namit@devops:~$ docker version\nDocker version 24.0.2, build cb74f4c\namit@devops:~$ mvn --version\nApache Maven 3.9.2\namit@devops:~$ java -version\nopenjdk version "17.0.7"\namit@devops:~$ echo "All tools successfully configured! Ready to practice DevOps."',
+            
+            'u1': 'amit@devops:~$ docker pull nginx:alpine\nStatus: Downloaded newer image for nginx:alpine\namit@devops:~$ docker run -d --name web_server -p 80:80 nginx:alpine\nf9e18b0c223a851d0db1262ab091176b1\namit@devops:~$ docker ps\nCONTAINER ID   IMAGE          COMMAND       STATUS       PORTS\nf9e18b0c223a   nginx:alpine   "nginx -g…"   Up 2 sec     0.0.0.0:80->80/tcp',
+            
+            'u2': 'amit@devops:~$ docker build -t my-custom-app:v1 .\n[+] Building 4.2s (8/8) FINISHED\n => [internal] load build definition from Dockerfile\n => [internal] load metadata for node:20-alpine\n => [1/4] FROM node:20-alpine\n => [2/4] COPY package*.json ./\n => [3/4] RUN npm ci\n => [4/4] COPY . .\n => exporting to image\n => => writing image sha256:d8c9f0e132',
+            
+            'u3': 'amit@devops:~$ docker compose up -d\n[+] Running 4/4\n ⠿ Network internal_network  Created\n ⠿ Volume db_data            Created\n ⠿ Container mysql_db        Started\n ⠿ Container wordpress_app   Started',
+            
+            'u4': 'amit@devops:~$ mvn clean package\n[INFO] Scanning for projects...\n[INFO] ------------------------------------------------------------------------\n[INFO] BUILD SUCCESS\n[INFO] ------------------------------------------------------------------------\n[INFO] Total time: 3.421 s\n[INFO] Finished at: 2026-05-01T21:40:00Z\n[INFO] ------------------------------------------------------------------------',
+            
+            'u5': 'amit@devops:~$ git push origin main\nEnumerating objects: 5, done.\nCounting objects: 100% (5/5), done.\nWriting objects: 100% (3/3), 320 bytes\nTo https://github.com/Amit123103/Devops.git\n   c17c100..ad06733  main -> main\n[INFO] GitHub Actions Runner: Running tests for Amit...',
+            
+            'u6': 'amit@devops:~$ jenkins-cli build my-pipeline\nStarted by remote user Amit\nRunning in Jenkins Agent Node #3\n[Pipeline] stage (Checkout)\n[Pipeline] sh "git fetch --all"\n[Pipeline] stage (Build)\n[Pipeline] sh "mvn clean test"\n[Pipeline] Finished: SUCCESS'
+        };
+
+        function switchUnit(unitId) {
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => item.classList.remove('active'));
+
+            const link = document.querySelector(`a[href="#${unitId}"]`);
+            if (link) {
+                link.parentElement.classList.add('active');
+            }
+
+            const sections = document.querySelectorAll('.unit-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+                if (section.id === unitId) {
+                    section.classList.add('active');
+                }
+            });
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function startSim(termId, simKey) {
+            const termContainer = document.getElementById(termId);
+            const textElement = document.getElementById(termId + '-txt');
+            const fullText = simulations[simKey] || '';
+            
+            termContainer.classList.add('active');
+            textElement.textContent = "";
+
+            let index = 0;
+            function typeNextChar() {
+                if (index < fullText.length) {
+                    textElement.textContent += fullText.charAt(index);
+                    index++;
+                    setTimeout(typeNextChar, 14);
+                }
+            }
+            typeNextChar();
+        }
+    </script>
 </body>
 </html>
