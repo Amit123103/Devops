@@ -1,38 +1,47 @@
 # 🚀 Comprehensive DevOps & Infrastructure Engineering Practicals
 
-Welcome to the ultimate repository for DevOps, containerization, microservices, and continuous integration. Curated and implemented for **Amit**, this repository covers all foundational and advanced topics across 6 units.
+Welcome to the ultimate repository for DevOps, containerization, microservices, and continuous integration. Curated and implemented for **Amit**, this repository covers all foundational and advanced topics across 6 units in brief and in full detail.
 
 ---
 
-## 📂 Repository Structure
+## 📂 Comprehensive Unit Summaries
 
 ### [Unit I: Basics of DevOps Infrastructure](Unit_01_DevOps_and_Containers/README.md)
-* Origin of containers, Modern containerization, Process isolation, Namespaces, Cgroups, Docker architecture, Object types.
-* **Practical:** Installing Docker on Windows/Linux, basic commands.
+* **Origins of Containers:** Historically, applications were deployed directly onto single OS hardware or heavy Virtual Machines. Modern containers provide OS-level virtualization sharing the host kernel via Namespaces & Cgroups.
+* **Linux Kernel Basics:**
+  - **Namespaces:** Isolate what a process can see (network interfaces, mount points, PIDs).
+  - **Control Groups (cgroups):** Restrict hardware resource usage (CPU, RAM).
+* **Docker Objects:** Includes daemon (`dockerd`), CLI, images (read-only layers), containers (read-write instances), volumes (persistence), and networks.
+* **Practical Commands:** `docker version`, `docker pull nginx`, `docker images`, `docker run -d`, `docker ps`.
 
 ### [Unit II: Image Building & Container Management](Unit_02_Image_Building/README.md)
-* Core concepts of layering, `.dockerignore`, Dockerfile instructions, Build context, Port mapping.
-* Volumes vs bind mounts, registries (Docker Hub, GHCR).
-* **Practical:** Creating a Dockerfile, connecting container storage.
+* **Layering & CoW:** Images use layered read-only filesystems. Changes happen in the top container layer using the Copy-on-Write (CoW) mechanism.
+* **Build Optimization:** Uses `.dockerignore` file to omit non-essential local files from the daemon build context.
+* **Network Drivers:** Bridge network (default host isolated), host network (no isolation), overlay network (multi-host swarm).
+* **Storage Strategies:** Volumes are fully managed by Docker. Bind Mounts map directly to host directory paths.
+* **Practical:** Writing efficient Dockerfiles, tagging (`docker tag`), and pushing to Hub/GHCR.
 
 ### [Unit III: Microservices with Docker Compose](Unit_03_Docker_Compose/README.md)
-* Monolithic vs Microservices architecture, API Gateway.
-* Writing `docker-compose.yml`, volumes, networks, environment variables, secrets.
-* **Practical:** Multi-container deployment of WordPress + MySQL.
+* **Architecture Shift:** Migration from Monolithic applications to lightweight, independent microservices behind an API Gateway.
+* **Docker Compose (YAML):** Configures services, networks, volumes, environment variables, secrets, and startup ordering dependencies.
+* **Practical Stack:** Multi-container WordPress stack with an interconnected local MySQL database.
+* **Commands:** `docker compose up -d`, `docker compose ps`, `docker compose down -v`.
 
 ### [Unit IV: Maven Build Automation](Unit_04_Maven_Automation/README.md)
-* Project Object Model (POM), Directory structure, Lifecycle phases.
-* Dependency scopes, Transitive dependencies, Maven wrapper.
-* **Practical:** Dockerizing Maven-based Java/Spring Boot applications.
+* **Automated Builds:** Manages dependencies, simplifies compilation classpaths, resolves version conflicts using strict lifecycle phases.
+* **Build Lifecycle:** `validate`, `compile`, `test`, `package`, `verify`, `install`, `deploy`.
+* **Plugins Configured:** `maven-compiler-plugin`, `maven-surefire-plugin` (unit tests), `maven-shade-plugin` (Uber-JAR creation).
+* **Docker Multi-Stage Build:** Optimizes container sizes by building code in a Maven image and running it inside a clean JRE.
 
 ### [Unit V: Continuous Integration (CI) with GitHub Actions](Unit_05_GitHub_Actions/README.md)
-* CI workflow triggers, Jobs, Steps, Matrix strategies, Runners.
-* **Practical:** Building Docker images in CI, pushing to Docker Hub & GHCR.
+* **Workflow Directory:** `.github/workflows/ci.yml`. Contains workflows, triggers, jobs, steps, and runners.
+* **Strategy & Caching:** Leverages matrix execution for multiple testing versions and caching for fast Maven dependencies resolution.
+* **Automated Deployment:** Builds Docker images in GitHub-hosted runners and publishes them to registries like Docker Hub and GHCR.
 
 ### [Unit VI: CI/CD with Jenkins](Unit_06_Jenkins_CICD/README.md)
-* Master-agent architecture, Plugins, Pipelines (Freestyle vs Declarative/Scripted).
-* Triggering builds, pipeline libraries, agent configurations.
-* **Practical:** End-to-end multi-branch CI/CD for Docker and Maven using Jenkins.
+* **Master/Agent Nodes:** Master schedules jobs and handles orchestration; Agents execute commands.
+* **Pipeline Structure:** Declarative pipeline syntax in a `Jenkinsfile` for code versioning. Includes stages: Checkout, Compile, Build, and Deploy.
+* **Advanced Options:** Dynamic execution inside temporary Docker agents and Webhook configuration for instant trigger updates.
 
 ---
 
