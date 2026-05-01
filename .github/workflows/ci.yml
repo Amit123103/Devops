@@ -10,6 +10,9 @@ jobs:
   build_and_test:
     name: Build & Run Tests
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Unit_04_Maven_Automation
 
     steps:
     - name: Checkout Code from Repo
@@ -21,6 +24,7 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
+        cache-dependency-path: '**/pom.xml'
 
     - name: Run Maven Tests
       run: mvn test
@@ -47,6 +51,6 @@ jobs:
     - name: Build and Push Docker Image
       uses: docker/build-push-action@v5
       with:
-        context: .
+        context: ./Unit_02_Image_Building
         push: true
         tags: amit/my-app:latest
