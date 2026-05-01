@@ -352,6 +352,20 @@
             font-weight: 600;
         }
 
+        .details-box {
+            background: rgba(255,255,255, 0.02);
+            border-left: 4px solid #ffffff;
+            padding: 24px;
+            border-radius: 8px;
+            margin: 28px 0;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .details-box p {
+            margin-bottom: 12px;
+        }
+
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes slideUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -431,6 +445,26 @@
                 <div class="terminal-body" id="term1-txt"></div>
             </div>
 
+            <div class="details-box">
+                <p><strong>Core Concepts & Theory:</strong></p>
+                <p>Before containers, applications were deployed directly on physical hardware or Virtual Machines (VMs). Virtual Machines sit above hardware via hypervisor to run guest instances, incurring large CPU overhead. Containers provide operating-system-level virtualization, sharing a single host kernel while keeping individual files, environment variables, and processes completely isolated.</p>
+                <p><strong>Process Isolation Mechanisms:</strong></p>
+                <p>Linux utilizes Namespaces to handle complete logical isolation of processes, networking, and inter-process variables. Control groups (cgroups) manage complete physical hardware allocation and constraint boundaries across processing components.</p>
+            </div>
+
+            <h4>📋 Essential Command Pipeline</h4>
+            <pre><code># Verify docker status
+docker version
+
+# Pull an image completely from Registry
+docker pull nginx:latest
+
+# Spin up detached web application
+docker run -d -p 8080:80 --name amit_web_server nginx:latest
+
+# List all active containers
+docker ps</code></pre>
+
             <h4>📸 Visual Demonstrations (8 Images)</h4>
             <div class="image-gallery">
                 <div class="gallery-item"><img src="./Unit_01_DevOps_and_Containers/amit_docker_cli.png"><div class="gallery-caption">CLI Core</div></div>
@@ -460,6 +494,22 @@
                 </div>
                 <div class="terminal-body" id="term2-txt"></div>
             </div>
+
+            <div class="details-box">
+                <p><strong>Image Layering & Copy-on-Write:</strong></p>
+                <p>Images are immutable read-only sequence layers where each represents a specific Dockerfile step instruction. Copy-On-Write (CoW) copies required base assets up into the writeable top layer before making any modifications, optimizing file sizes.</p>
+                <p><strong>Docker Storage Models:</strong></p>
+                <p>Volume directories are completely managed and lifecycle-controlled by the container engine. Bind mounts bind external host folders directly into the processing environment.</p>
+            </div>
+
+            <h4>📝 Recommended Dockerfile & Workspace Layout</h4>
+            <pre><code>FROM node:20-alpine
+WORKDIR /usr/src/app
+COPY package*.json ./
+RUN npm ci --only=production
+COPY . .
+EXPOSE 3000
+CMD ["node", "server.js"]</code></pre>
 
             <h4>📸 Visual Demonstrations (8 Images)</h4>
             <div class="image-gallery">
@@ -491,6 +541,38 @@
                 <div class="terminal-body" id="term3-txt"></div>
             </div>
 
+            <div class="details-box">
+                <p><strong>Monolithic vs Microservices:</strong></p>
+                <p>Microservices divide architectures into small standalone units that communicate over APIs, enhancing scalability and fault tolerance. Docker Compose orchestrates these units in isolated network environments via single commands.</p>
+            </div>
+
+            <h4>📄 Multi-Container Deployment Blueprint (`docker-compose.yml`)</h4>
+            <pre><code>version: '3.8'
+services:
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root_secret_pwd
+      MYSQL_DATABASE: wordpress
+    volumes:
+      - wordpress_db_data:/var/lib/mysql
+    networks:
+      - internal_network
+  wordpress:
+    image: wordpress:latest
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+    networks:
+      - internal_network
+
+volumes:
+  wordpress_db_data:
+networks:
+  internal_network:</code></pre>
+
             <h4>📸 Visual Demonstrations (8 Images)</h4>
             <div class="image-gallery">
                 <div class="gallery-item"><img src="./Unit_03_Docker_Compose/amit_docker_compose.png"><div class="gallery-caption">Stack Orchestration</div></div>
@@ -520,6 +602,18 @@
                 </div>
                 <div class="terminal-body" id="term4-txt"></div>
             </div>
+
+            <div class="details-box">
+                <p><strong>The Project Object Model (POM) Lifecycle:</strong></p>
+                <p>A standardized XML declaration that defines project configurations, plugins, and dependencies across standard default phases: validate, compile, test, package, install, and deploy.</p>
+            </div>
+
+            <h4>📋 Direct CLI Maven Execution</h4>
+            <pre><code># Trigger dependency extraction and run test suites completely
+mvn clean test
+
+# Output the complete packaged execution archive JAR
+mvn package -DskipTests</code></pre>
 
             <h4>📸 Visual Demonstrations (8 Images)</h4>
             <div class="image-gallery">
@@ -551,6 +645,27 @@
                 <div class="terminal-body" id="term5-txt"></div>
             </div>
 
+            <div class="details-box">
+                <p><strong>Continuous Integration Lifecycle:</strong></p>
+                <p>Continuous integration automatically aggregates codebase updates via workflows, triggers isolated runners, packages target binaries, and enforces software delivery standards completely.</p>
+            </div>
+
+            <h4>📦 Standard Workflow YAML Definition (`.github/workflows/ci.yml`)</h4>
+            <pre><code>name: Complete CI Pipeline
+on:
+  push:
+    branches: [ main ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - run: mvn test</code></pre>
+
             <h4>📸 Visual Demonstrations (8 Images)</h4>
             <div class="image-gallery">
                 <div class="gallery-item"><img src="./Unit_05_GitHub_Actions/amit_github_actions.png"><div class="gallery-caption">GitHub Outputs</div></div>
@@ -580,6 +695,28 @@
                 </div>
                 <div class="terminal-body" id="term6-txt"></div>
             </div>
+
+            <div class="details-box">
+                <p><strong>Master/Worker Architecture:</strong></p>
+                <p>Jenkins establishes reliable pipelines via Master and Worker Agent connections. This divides orchestrations across nodes to balance server workloads and speed up testing cycles.</p>
+            </div>
+
+            <h4>🤖 Declarative Pipeline Template (`Jenkinsfile`)</h4>
+            <pre><code>pipeline {
+    agent any
+    stages {
+        stage('Checkout Code') {
+            steps {
+                git branch: 'main', url: 'https://github.com/Amit123103/githubdevops.git'
+            }
+        }
+        stage('Compile & Test') {
+            steps {
+                sh 'mvn clean test'
+            }
+        }
+    }
+}</code></pre>
 
             <h4>📸 Visual Demonstrations (8 Images)</h4>
             <div class="image-gallery">
