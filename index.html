@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amit's Advanced DevOps Masterclass</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --sidebar-bg: rgba(17, 24, 39, 0.85);
+            --panel-bg: rgba(31, 41, 55, 0.55);
+            --accent: #3b82f6;
+            --accent-gradient: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at top right, rgba(59, 130, 246, 0.08), transparent),
+                              radial-gradient(circle at bottom left, rgba(139, 92, 246, 0.08), transparent);
+        }
+
+        /* Sidebar Glassmorphic Design */
+        .sidebar {
+            width: 320px;
+            background: var(--sidebar-bg);
+            backdrop-filter: blur(12px);
+            border-right: 1px solid var(--border-color);
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            padding: 40px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+            z-index: 100;
+        }
+
+        .sidebar-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .sidebar-brand h1 {
+            font-size: 24px;
+            font-weight: 800;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .sidebar-brand span {
+            font-size: 13px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .nav-item a {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 18px;
+            color: var(--text-muted);
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid transparent;
+        }
+
+        .nav-item a:hover, .nav-item.active a {
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-main);
+            border-color: rgba(59, 130, 246, 0.25);
+            transform: translateX(4px);
+        }
+
+        /* Main Content Panel */
+        .main-content {
+            margin-left: 320px;
+            padding: 60px 80px;
+            width: calc(100% - 320px);
+            max-width: 1200px;
+        }
+
+        .header-section {
+            margin-bottom: 50px;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .header-section h2 {
+            font-size: 42px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 12px;
+        }
+
+        .header-section p {
+            font-size: 18px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .unit-section {
+            background: var(--panel-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 48px;
+            margin-bottom: 50px;
+            display: none;
+            animation: slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .unit-section.active {
+            display: block;
+        }
+
+        .unit-title {
+            font-size: 32px;
+            font-weight: 800;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 24px;
+        }
+
+        .unit-intro {
+            color: var(--text-muted);
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 32px;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 28px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(59, 130, 246, 0.3);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .feature-card h4 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-main);
+        }
+
+        .feature-card p {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* Syntax Highlighter Look-alike */
+        pre {
+            background: rgba(17, 24, 39, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 24px;
+            overflow-x: auto;
+            margin: 24px 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #818cf8;
+        }
+
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(255, 255, 255, 0.06);
+            color: #f472b6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+
+        /* Dynamic Image Gallery Styling */
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 16px;
+            margin-top: 32px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            aspect-ratio: 16/9;
+            background: rgba(0,0,0,0.2);
+        }
+
+        .gallery-item:hover {
+            border-color: rgba(139, 92, 246, 0.4);
+            transform: scale(1.03);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.85));
+            color: #fff;
+            font-size: 12px;
+            padding: 10px 14px;
+            font-weight: 500;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Custom Scrollbars */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        @media (max-width: 1024px) {
+            body { flex-direction: column; }
+            .sidebar { width: 100%; height: auto; position: relative; border-right: none; border-bottom: 1px solid var(--border-color); }
+            .main-content { margin-left: 0; width: 100%; padding: 40px 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SIDEBAR NAVIGATION -->
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <h1>Amit DevOps</h1>
+            <span>Infrastructure Masterclass</span>
+        </div>
+        <ul class="nav-list">
+            <li class="nav-item active"><a href="#unit1" onclick="switchUnit('unit1')">📦 01. DevOps Infrastructure</a></li>
+            <li class="nav-item"><a href="#unit2" onclick="switchUnit('unit2')">🛠️ 02. Image Building</a></li>
+            <li class="nav-item"><a href="#unit3" onclick="switchUnit('unit3')">🌐 03. Docker Compose</a></li>
+            <li class="nav-item"><a href="#unit4" onclick="switchUnit('unit4')">⚙️ 04. Maven Automation</a></li>
+            <li class="nav-item"><a href="#unit5" onclick="switchUnit('unit5')">🚀 05. GitHub Actions</a></li>
+            <li class="nav-item"><a href="#unit6" onclick="switchUnit('unit6')">🤖 06. Jenkins CI/CD</a></li>
+        </ul>
+    </aside>
+
+    <!-- MAIN CONTENT DASHBOARD -->
+    <main class="main-content">
+        <div class="header-section">
+            <h2>Welcome to Amit's DevOps Suite</h2>
+            <p>Access theory, code configurations, practical steps, and complete visual demos across all 6 units in premium quality.</p>
+        </div>
+
+        <!-- UNIT 1 -->
+        <section id="unit1" class="unit-section active">
+            <h3 class="unit-title">Unit I: Basics of DevOps Infrastructure</h3>
+            <p class="unit-intro">Explore Linux OS-level virtualization through kernel primitives like Namespaces and Control Groups (cgroups), Docker engine internals, and the Docker CLI.</p>
+            
+            <div class="card-grid">
+                <div class="feature-card">
+                    <h4>Linux Namespaces</h4>
+                    <p>Enforces process boundary isolation. Limits process visibility across network, mounts, process tree (PID), and user IDs.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Cgroups (Control Groups)</h4>
+                    <p>Monitors and restricts host compute resource distribution (CPU cycles, memory allocation, block I/O) to containers.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Process Virtualization</h4>
+                    <p>Unlike bare-metal or hypervisor-bound Virtual Machines, containers use the host's Linux kernel natively for speed and density.</p>
+                </div>
+            </div>
+
+            <h4>Core Commands & Demo</h4>
+            <pre>
+# Pulling basic Nginx web server image
+docker pull nginx:alpine
+
+# Run an isolated web server container
+docker run -d --name amit_web_server -p 80:80 nginx:alpine
+
+# Checking operational containers
+docker ps -a
+            </pre>
+
+            <h4>📸 Practical Visualizations (8 Images)</h4>
+            <div class="image-gallery">
+                <div class="gallery-item"><img src="./Unit_01_DevOps_and_Containers/amit_docker_cli.png"><div class="gallery-caption">Terminal Commands</div></div>
+                <div class="gallery-item"><img src="./Unit_01_DevOps_and_Containers/amit_u1_p1.png"><div class="gallery-caption">Container vs VM Architecture</div></div>
+                <div class="gallery-item"><img src="./Unit_01_DevOps_and_Containers/amit_u1_p2.png"><div class="gallery-caption">Namespaces Isolation</div></div>
+                <div class="gallery-item"><img src="./Unit_01_DevOps_and_Containers/amit_u1_p3.png"><div class="gallery-caption">Control Groups Limits</div></div>
+                <div class="gallery-item"><img src="./Unit_01_DevOps_and_Containers/amit_u1_p4.png"><div class="gallery-caption">Docker Daemon Workflow</div></div>
+                <div class="gallery-item"><img src="./Unit_01_DevOps_and_Containers/amit_u1_p5.png"><div class="gallery-caption">Docker Pull Nginx</div></div>
+                <div class="gallery-item"><img src="./Unit_01_DevOps_and_Containers/amit_u1_p6.png"><div class="gallery-caption">Detached Containers</div></div>
+                <div class="gallery-item"><img src="./Unit_01_DevOps_and_Containers/amit_u1_p7.png"><div class="gallery-caption">Listing Images</div></div>
+            </div>
+        </section>
+
+        <!-- UNIT 2 -->
+        <section id="unit2" class="unit-section">
+            <h3 class="unit-title">Unit II: Image Building & Container Management</h3>
+            <p class="unit-intro">Advanced Dockerfile optimization strategies. Understand read-only layered caching, storage volumes, bind mounts, and isolated bridge networking.</p>
+
+            <div class="card-grid">
+                <div class="feature-card">
+                    <h4>Read-Only Layers</h4>
+                    <p>Dockerfile commands create stacked read-only file system layers. Optimizes storage through Copy-on-Write (CoW).</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Docker Volumes</h4>
+                    <p>A designated persistent layer stored in host directories, managed exclusively by the Docker daemon.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Bind Mounts</h4>
+                    <p>Binds a strict path from the host directly into the container. Excellent for live code reloading in dev stages.</p>
+                </div>
+            </div>
+
+            <h4>Dockerfile Implementation Example</h4>
+            <pre>
+# Use secure, lightweight base image
+FROM node:20-alpine
+LABEL maintainer="amit@example.com"
+WORKDIR /usr/src/app
+COPY package*.json ./
+RUN npm ci --only=production
+COPY . .
+EXPOSE 3000
+CMD ["node", "server.js"]
+            </pre>
+
+            <h4>📸 Practical Visualizations (8 Images)</h4>
+            <div class="image-gallery">
+                <div class="gallery-item"><img src="./Unit_02_Image_Building/amit_docker_build.png"><div class="gallery-caption">Build & Tag Example</div></div>
+                <div class="gallery-item"><img src="./Unit_02_Image_Building/amit_u2_p1.png"><div class="gallery-caption">Image Layering</div></div>
+                <div class="gallery-item"><img src="./Unit_02_Image_Building/amit_u2_p2.png"><div class="gallery-caption">Copy-on-Write Logic</div></div>
+                <div class="gallery-item"><img src="./Unit_02_Image_Building/amit_u2_p3.png"><div class="gallery-caption">Dockerignore Setup</div></div>
+                <div class="gallery-item"><img src="./Unit_02_Image_Building/amit_u2_p4.png"><div class="gallery-caption">Docker Tagging</div></div>
+                <div class="gallery-item"><img src="./Unit_02_Image_Building/amit_u2_p5.png"><div class="gallery-caption">Bridge Network</div></div>
+                <div class="gallery-item"><img src="./Unit_02_Image_Building/amit_u2_p6.png"><div class="gallery-caption">Volume vs Bind Mount</div></div>
+                <div class="gallery-item"><img src="./Unit_02_Image_Building/amit_u2_p7.png"><div class="gallery-caption">Docker Hub Uploads</div></div>
+            </div>
+        </section>
+
+        <!-- UNIT 3 -->
+        <section id="unit3" class="unit-section">
+            <h3 class="unit-title">Unit III: Microservices with Docker Compose</h3>
+            <p class="unit-intro">Designing decoupled, resilient enterprise architectures. Master multi-container orchestration with Docker Compose YAML configuration.</p>
+
+            <div class="card-grid">
+                <div class="feature-card">
+                    <h4>Decoupled Scaling</h4>
+                    <p>Isolating monoliths into small independent services behind an API gateway for microservice fault isolation.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Service Orchestration</h4>
+                    <p>Docker Compose allows creating services, networks, volumes, environment definitions, and secrets with a single script.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Dependencies Control</h4>
+                    <p>Use <code>depends_on</code> field constraints to control the startup order sequence of interconnected backend servers.</p>
+                </div>
+            </div>
+
+            <h4>WordPress & MySQL Compose YAML</h4>
+            <pre>
+version: '3.8'
+services:
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root_secret_pwd
+      MYSQL_DATABASE: wordpress
+    volumes:
+      - db_data:/var/lib/mysql
+  wordpress:
+    image: wordpress:latest
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+    volumes:
+      - app_data:/var/www/html
+volumes:
+  db_data:
+  app_data:
+            </pre>
+
+            <h4>📸 Practical Visualizations (8 Images)</h4>
+            <div class="image-gallery">
+                <div class="gallery-item"><img src="./Unit_03_Docker_Compose/amit_docker_compose.png"><div class="gallery-caption">Compose Up Output</div></div>
+                <div class="gallery-item"><img src="./Unit_03_Docker_Compose/amit_u3_p1.png"><div class="gallery-caption">Architecture Split</div></div>
+                <div class="gallery-item"><img src="./Unit_03_Docker_Compose/amit_u3_p2.png"><div class="gallery-caption">Gateway Layout</div></div>
+                <div class="gallery-item"><img src="./Unit_03_Docker_Compose/amit_u3_p3.png"><div class="gallery-caption">YAML Rules</div></div>
+                <div class="gallery-item"><img src="./Unit_03_Docker_Compose/amit_u3_p4.png"><div class="gallery-caption">Database Topology</div></div>
+                <div class="gallery-item"><img src="./Unit_03_Docker_Compose/amit_u3_p5.png"><div class="gallery-caption">Multi-Container Build</div></div>
+                <div class="gallery-item"><img src="./Unit_03_Docker_Compose/amit_u3_p6.png"><div class="gallery-caption">Compose PS Status</div></div>
+                <div class="gallery-item"><img src="./Unit_03_Docker_Compose/amit_u3_p7.png"><div class="gallery-caption">Tearing Down Services</div></div>
+            </div>
+        </section>
+
+        <!-- UNIT 4 -->
+        <section id="unit4" class="unit-section">
+            <h3 class="unit-title">Unit IV: Maven Build Automation</h3>
+            <p class="unit-intro">Master Project Object Model configurations, strict transitive dependency scoping, Maven plugins, and Dockerized multi-stage deployments.</p>
+
+            <div class="card-grid">
+                <div class="feature-card">
+                    <h4>POM Structure</h4>
+                    <p>The <code>pom.xml</code> explicitly controls external artifact fetching, compiler constraints, and output bundling configurations.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Transitive Dependency</h4>
+                    <p>Maven builds resolve dependency versions dynamically using local-nearest definitions to mitigate classpath pollution.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Multi-Stage Containers</h4>
+                    <p>Builds the heavy application source code within a build image, then injects binaries directly into thin JRE runtimes.</p>
+                </div>
+            </div>
+
+            <h4>Maven Multi-Stage Dockerfile</h4>
+            <pre>
+# Stage 1: Dependency resolution & package
+FROM maven:3.9-eclipse-temurin-17 AS build
+WORKDIR /app
+COPY pom.xml .
+RUN mvn dependency:go-offline
+COPY src ./src
+RUN mvn clean package -DskipTests
+
+# Stage 2: Runtime Container Deployment
+FROM eclipse-temurin:17-jre-alpine
+WORKDIR /app
+COPY --from=build /app/target/*.jar app.jar
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "app.jar"]
+            </pre>
+
+            <h4>📸 Practical Visualizations (8 Images)</h4>
+            <div class="image-gallery">
+                <div class="gallery-item"><img src="./Unit_04_Maven_Automation/amit_maven.png"><div class="gallery-caption">Clean Package CLI</div></div>
+                <div class="gallery-item"><img src="./Unit_04_Maven_Automation/amit_u4_p1.png"><div class="gallery-caption">Lifecycle Stages</div></div>
+                <div class="gallery-item"><img src="./Unit_04_Maven_Automation/amit_u4_p2.png"><div class="gallery-caption">Folder Conventions</div></div>
+                <div class="gallery-item"><img src="./Unit_04_Maven_Automation/amit_u4_p3.png"><div class="gallery-caption">Transitive Graphs</div></div>
+                <div class="gallery-item"><img src="./Unit_04_Maven_Automation/amit_u4_p4.png"><div class="gallery-caption">Plugins Resolution</div></div>
+                <div class="gallery-item"><img src="./Unit_04_Maven_Automation/amit_u4_p5.png"><div class="gallery-caption">Test Compiling Output</div></div>
+                <div class="gallery-item"><img src="./Unit_04_Maven_Automation/amit_u4_p6.png"><div class="gallery-caption">Uber-Jar Packages</div></div>
+                <div class="gallery-item"><img src="./Unit_04_Maven_Automation/amit_u4_p7.png"><div class="gallery-caption">Multi-Stage Visual</div></div>
+            </div>
+        </section>
+
+        <!-- UNIT 5 -->
+        <section id="unit5" class="unit-section">
+            <h3 class="unit-title">Unit V: Continuous Integration with GitHub Actions</h3>
+            <p class="unit-intro">Leverage modern workflow files in your codebase to run tests and push production-ready images on commits.</p>
+
+            <div class="card-grid">
+                <div class="feature-card">
+                    <h4>Workflow Automations</h4>
+                    <p>Listen directly to repository webhook triggers like <code>push</code> or <code>pull_request</code> to kickstart automation tests.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Parallel Runners</h4>
+                    <p>Utilize multi-job pipelines in dedicated cloud runners (Ubuntu, Windows) to run tests parallelly.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Matrix Builds</h4>
+                    <p>Test matching variations simultaneously across multiple Node or JDK platforms within a single job execution block.</p>
+                </div>
+            </div>
+
+            <h4>GitHub Actions Workflow Template</h4>
+            <pre>
+name: Continuous Integration Suite
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+    - name: Execute JUnit Automation Tests
+      run: mvn test
+            </pre>
+
+            <h4>📸 Practical Visualizations (8 Images)</h4>
+            <div class="image-gallery">
+                <div class="gallery-item"><img src="./Unit_05_GitHub_Actions/amit_github_actions.png"><div class="gallery-caption">UI Build Stages</div></div>
+                <div class="gallery-item"><img src="./Unit_05_GitHub_Actions/amit_u5_p1.png"><div class="gallery-caption">Directory Topology</div></div>
+                <div class="gallery-item"><img src="./Unit_05_GitHub_Actions/amit_u5_p2.png"><div class="gallery-caption">Jobs Matrix</div></div>
+                <div class="gallery-item"><img src="./Unit_05_GitHub_Actions/amit_u5_p3.png"><div class="gallery-caption">GitHub Actions</div></div>
+                <div class="gallery-item"><img src="./Unit_05_GitHub_Actions/amit_u5_p4.png"><div class="gallery-caption">Runners Topology</div></div>
+                <div class="gallery-item"><img src="./Unit_05_GitHub_Actions/amit_u5_p5.png"><div class="gallery-caption">Docker Push Automation</div></div>
+                <div class="gallery-item"><img src="./Unit_05_GitHub_Actions/amit_u5_p6.png"><div class="gallery-caption">Caching Pipeline</div></div>
+                <div class="gallery-item"><img src="./Unit_05_GitHub_Actions/amit_u5_p7.png"><div class="gallery-caption">End-to-End Build</div></div>
+            </div>
+        </section>
+
+        <!-- UNIT 6 -->
+        <section id="unit6" class="unit-section">
+            <h3 class="unit-title">Unit VI: CI/CD with Jenkins</h3>
+            <p class="unit-intro">Establish robust declarative multi-stage software delivery pipelines utilizing persistent Master and Agent worker topologies.</p>
+
+            <div class="card-grid">
+                <div class="feature-card">
+                    <h4>Master/Agent Architecture</h4>
+                    <p>Master orchestrates job scheduling, triggers, and configurations. Ephemeral agents execute steps securely.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Declarative Syntax</h4>
+                    <p>Structured, versioned Groovy DSL configuration saved within code as a <code>Jenkinsfile</code> to improve reliability.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Dynamic Docker</h4>
+                    <p>Spin up container execution layers natively within stages so each step runs inside its isolated build environment.</p>
+                </div>
+            </div>
+
+            <h4>Declarative Jenkinsfile Configuration</h4>
+            <pre>
+pipeline {
+    agent any
+    stages {
+        stage('Checkout') {
+            steps { git branch: 'main', url: 'https://github.com/Amit/Devops.git' }
+        }
+        stage('Build & Test') {
+            steps { sh 'mvn clean test' }
+        }
+        stage('Docker Push') {
+            steps {
+                sh 'docker build -t amit/app:latest .'
+                sh 'docker push amit/app:latest'
+            }
+        }
+    }
+}
+            </pre>
+
+            <h4>📸 Practical Visualizations (8 Images)</h4>
+            <div class="image-gallery">
+                <div class="gallery-item"><img src="./Unit_06_Jenkins_CICD/amit_jenkins.png"><div class="gallery-caption">Jenkins BlueOcean UI</div></div>
+                <div class="gallery-item"><img src="./Unit_06_Jenkins_CICD/amit_u6_p1.png"><div class="gallery-caption">Architecture Cluster</div></div>
+                <div class="gallery-item"><img src="./Unit_06_Jenkins_CICD/amit_u6_p2.png"><div class="gallery-caption">Job Types Grid</div></div>
+                <div class="gallery-item"><img src="./Unit_06_Jenkins_CICD/amit_u6_p3.png"><div class="gallery-caption">Declarative Pipeline DSL</div></div>
+                <div class="gallery-item"><img src="./Unit_06_Jenkins_CICD/amit_u6_p4.png"><div class="gallery-caption">Global Tool Config</div></div>
+                <div class="gallery-item"><img src="./Unit_06_Jenkins_CICD/amit_u6_p5.png"><div class="gallery-caption">Docker Execution Layer</div></div>
+                <div class="gallery-item"><img src="./Unit_06_Jenkins_CICD/amit_u6_p6.png"><div class="gallery-caption">SCM Webhook Setup</div></div>
+                <div class="gallery-item"><img src="./Unit_06_Jenkins_CICD/amit_u6_p7.png"><div class="gallery-caption">Multibranch Status</div></div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function switchUnit(unitId) {
+            // Remove active status from sidebar
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => item.classList.remove('active'));
+
+            // Set specific sidebar item as active
+            const link = document.querySelector(`a[href="#${unitId}"]`);
+            if (link) {
+                link.parentElement.classList.add('active');
+            }
+
+            // Hide/Show correct content section
+            const sections = document.querySelectorAll('.unit-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+                if (section.id === unitId) {
+                    section.classList.add('active');
+                }
+            });
+
+            // Smooth scroll to top of viewport
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
