@@ -45,6 +45,14 @@ Welcome to the ultimate repository for DevOps, containerization, microservices, 
 
 ---
 
+## 📚 Supplemental Resources
+In addition to the practical units above, this repository includes comprehensive lecture notes and task reports:
+*   📄 [Unit 2, 3, & 4 Complete Notes](./unit%202,%20unit%203,%20unit%204.pdf)
+*   📄 [Unit 5 DevOps Notes](./unit%205%20Devops.pdf)
+*   📁 [Unit 1 Detailed Tasks & Reports](./Devops/)
+
+---
+
 ## 📦 Bundled Distribution
 All files, configurations, and experiments have been archived into a single file for easy portability:
 📥 [Download DevOps Practicals Zip (DevOps_Practicals_Amit.zip)](./DevOps_Practicals_Amit.zip)
